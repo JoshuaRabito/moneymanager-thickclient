@@ -2,6 +2,7 @@ package swing;
 
 import javax.swing.SwingUtilities;
 
+import swing.view.FormPanel;
 import swing.view.MainFrame;
 
 public class ClientLauncher {
@@ -11,6 +12,7 @@ public class ClientLauncher {
 			@Override
 			public void run() {
 				MainFrame frame = new MainFrame();
+				frame.add(new FormPanel());
 				
 				
 			}
