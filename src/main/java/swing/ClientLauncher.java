@@ -1,12 +1,12 @@
 package swing;
 
+import static javax.swing.UIManager.setLookAndFeel;
+
 import javax.swing.SwingUtilities;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import swing.view.FormPanel;
 import swing.view.MainFrame;
-
-import static javax.swing.UIManager.setLookAndFeel;
+import swing.view.MainView;
 
 public class ClientLauncher {
 	public static void main(String[] args) {
@@ -26,7 +26,7 @@ public class ClientLauncher {
 					e.printStackTrace();
 				}
 				MainFrame frame = new MainFrame();
-				frame.add(new FormPanel());
+				frame.add(new MainView());
 				
 				
 			}
