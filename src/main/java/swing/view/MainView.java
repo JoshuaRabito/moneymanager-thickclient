@@ -1,13 +1,19 @@
 package swing.view;
 
 import javax.swing.*;
+
+import net.miginfocom.swing.MigLayout;
+import swing.api.AccountType;
+
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.util.Objects;
 
 public class MainView extends JInternalFrame {
 
-    public MainView() {
+    private JComboBox<AccountType> accountTypeCombo;
+
+	public MainView() {
         init();
 
     }
@@ -37,9 +43,23 @@ public class MainView extends JInternalFrame {
     }
 
     private void buildForm() {
-        BorderLayout borderLayout = new BorderLayout();
-        getContentPane().setLayout(borderLayout);
         JLabel greetinglbl = new JLabel("Lets Manage some money!");
-        getContentPane().add(greetinglbl, BorderLayout.PAGE_START);
+        JLabel accountTypeLbl = new JLabel("Account Type");
+        accountTypeCombo = new JComboBox<AccountType>();
+       
+        Panel panel = new Panel();
+        MigLayout layout = new MigLayout();
+        panel.setLayout(layout);
+        panel.add(greetinglbl);
+        panel.add(accountTypeLbl);
+        panel.add(accountTypeCombo);
+        add(panel);
+        
     }
+
+	public JComboBox<AccountType> getAccountTypeCombo() {
+		return accountTypeCombo;
+	}
+    
+    
 }

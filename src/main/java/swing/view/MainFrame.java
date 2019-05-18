@@ -5,6 +5,8 @@ import java.awt.HeadlessException;
 
 import javax.swing.*;
 
+import swing.controller.MainViewController;
+
 public class MainFrame extends JFrame {
 
 	public MainFrame() throws HeadlessException {
@@ -19,7 +21,7 @@ public class MainFrame extends JFrame {
 	}
 
 	private void init() {
-		add(new MainView());
+		add(MainViewController.INSTANCE.getView());
 	}
 
 
