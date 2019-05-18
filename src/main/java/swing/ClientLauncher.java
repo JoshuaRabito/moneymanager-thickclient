@@ -1,6 +1,8 @@
 package swing;
 
 import javax.swing.SwingUtilities;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import swing.view.FormPanel;
 import swing.view.MainFrame;
 
