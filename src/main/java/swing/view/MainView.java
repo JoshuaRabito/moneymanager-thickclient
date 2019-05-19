@@ -35,7 +35,6 @@ public class MainView extends JInternalFrame {
 
     private void close(PropertyChangeEvent propertyChangeEvent) {
         if(JInternalFrame.IS_CLOSED_PROPERTY.equals(propertyChangeEvent.getPropertyName())) {
-            MainView view = (MainView) propertyChangeEvent.getSource();
             JOptionPane.showConfirmDialog(this, "Are you Sure you want to close the window?");
 
         }
@@ -45,14 +44,14 @@ public class MainView extends JInternalFrame {
     private void buildForm() {
         JLabel greetinglbl = new JLabel("Lets Manage some money!");
         JLabel accountTypeLbl = new JLabel("Account Type");
-        accountTypeCombo = new JComboBox<AccountType>();
-       
+        accountTypeCombo = new JComboBox<>();
+        
         Panel panel = new Panel();
         MigLayout layout = new MigLayout();
         panel.setLayout(layout);
-        panel.add(greetinglbl);
-        panel.add(accountTypeLbl);
-        panel.add(accountTypeCombo);
+        panel.add(greetinglbl, "cell 0 0");
+        panel.add(accountTypeLbl, "cell 0 1");
+        panel.add(accountTypeCombo, "cell 1 1");
         add(panel);
         
     }

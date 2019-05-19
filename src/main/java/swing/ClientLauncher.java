@@ -26,7 +26,7 @@ public class ClientLauncher {
 					e.printStackTrace();
 				}
 				MainFrame frame = new MainFrame();
-				frame.add(new MainView());
+			
 				
 				
 			}
