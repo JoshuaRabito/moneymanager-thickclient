@@ -1,2 +1,2 @@
-# MySwingApp
-Swing Practice 
+# My Money Manager
+Money Manager Application
