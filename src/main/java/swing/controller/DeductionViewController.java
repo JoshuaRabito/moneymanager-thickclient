@@ -29,4 +29,10 @@ public enum DeductionViewController {
 		
 	}
 
+	public DeductionView getView() {
+		return view;
+	}
+	
+	
+
 }

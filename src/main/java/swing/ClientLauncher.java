@@ -5,8 +5,9 @@ import static javax.swing.UIManager.setLookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import swing.controller.MainFrameController;
 import swing.view.MainFrame;
-import swing.view.MainView;
+import swing.view.NetIncomeView;
 
 public class ClientLauncher {
 	public static void main(String[] args) {
@@ -25,10 +26,7 @@ public class ClientLauncher {
 				} catch (UnsupportedLookAndFeelException e) {
 					e.printStackTrace();
 				}
-				MainFrame frame = new MainFrame();
-			
-				
-				
+				MainFrameController.INSTANCE.initMainFrame();
 			}
 		});
 	}
