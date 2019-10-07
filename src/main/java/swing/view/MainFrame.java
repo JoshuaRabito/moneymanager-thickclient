@@ -59,6 +59,12 @@ public class MainFrame extends JFrame {
 		return netIncomeItem;
 	}
 
+	public JDesktopPane getContentPane() {
+		return contentPane;
+	}
+	
+	
+
 
 	
 

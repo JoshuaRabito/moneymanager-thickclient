@@ -1,6 +1,8 @@
 package swing.controller;
 
 import java.beans.PropertyVetoException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.SwingUtilities;
 
@@ -12,9 +14,10 @@ public enum MainFrameController {
 	INSTANCE;
 
 	private MainFrame mainFrame;
+	private Map components;
 
 	private MainFrameController() {
-		
+		components = new HashMap<>();
 	}
 
 	
@@ -32,20 +35,37 @@ public enum MainFrameController {
 
 	private void bindListeners() {
 		mainFrame.getDeductionItem().addActionListener(e -> {
+			refreshDesktopPane();
 			openDeductionView();
 		});
 		
 		mainFrame.getNetIncomeItem().addActionListener(e -> {
+			refreshDesktopPane();
 			openNetIncomeView();
 		});
 		
 		
 	}
+
+
+
+	private void refreshDesktopPane() {
+		mainFrame.getContentPane().removeAll();
+		mainFrame.getContentPane().updateUI();
+	}
 	
 	private void openDeductionView() {
 		SwingUtilities.invokeLater(() ->{
+			
 			DeductionView deductionView = DeductionViewController.INSTANCE.getView();
 			mainFrame.getContentPane().add(deductionView);
+			deductionView.toFront();
+			deductionView.setVisible(true);
+			try {
+				deductionView.setSelected(true);
+			} catch (PropertyVetoException e) {
+				e.printStackTrace();
+			}
 		});
 		
 		
@@ -55,8 +75,13 @@ public enum MainFrameController {
 		SwingUtilities.invokeLater(() ->{
 			NetIncomeView netView = NetIncomeViewController.INSTANCE.getView();
 			mainFrame.getContentPane().add(netView);
-			
-			
+			netView.toFront();
+			netView.setVisible(true);
+			try {
+				netView.setSelected(true);
+			} catch (PropertyVetoException e) {
+				e.printStackTrace();
+			}
 		});
 		
 	}
