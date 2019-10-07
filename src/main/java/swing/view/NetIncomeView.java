@@ -38,6 +38,7 @@ public class NetIncomeView extends JInternalFrame implements Closeable{
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setSize(700, 700);
 
         
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

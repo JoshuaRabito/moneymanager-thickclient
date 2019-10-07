@@ -15,17 +15,15 @@ public class ClientLauncher {
 			
 			@Override
 			public void run() {
+		
 				try {
 					setLookAndFeel("org.pushingpixels.substance.api.skin.SubstanceMagellanLookAndFeel");
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e) {
+				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+						| UnsupportedLookAndFeelException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
 				MainFrameController.INSTANCE.initMainFrame();
 			}
 		});

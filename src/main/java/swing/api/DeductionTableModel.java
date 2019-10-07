@@ -18,7 +18,7 @@ public class DeductionTableModel extends AbstractTableModel {
 
 	public void addDeduction(Deduction deduction) {
 		deductions.add(deduction);
-		fireTableRowsInserted(deductions.size() - 1, deductions.size() - 1);
+		fireTableRowsInserted(deductions.size() - 1, deductions.size());
 	}
 
 	@Override

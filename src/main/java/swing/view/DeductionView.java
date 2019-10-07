@@ -3,12 +3,15 @@ package swing.view;
 import java.beans.PropertyChangeEvent;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -37,6 +40,7 @@ public class DeductionView extends JInternalFrame implements Closeable{
 		setIconifiable(true);
 		setMaximizable(true);
 		setResizable(true);
+		setSize(700, 700);
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addVetoableChangeListener(this::closePrompt);
@@ -55,10 +59,12 @@ public class DeductionView extends JInternalFrame implements Closeable{
         JPanel formPanel = new JPanel(new MigLayout());   
         deductionsTable = new JTable(new DeductionTableModel());
         JScrollPane jScrollPane = new JScrollPane(deductionsTable);
-        formPanel.add(jScrollPane);
+        formPanel.add(jScrollPane, "cell 0 0");
         JPanel buttonPanel = buildButtonPanel();
-        formPanel.add(buttonPanel);
+        formPanel.add(buttonPanel, "cell 0 1");
         add(formPanel);
+        
+       
 	}
 
 	private JPanel buildButtonPanel() {
@@ -73,5 +79,27 @@ public class DeductionView extends JInternalFrame implements Closeable{
         buttonPanel.add(closeBtn, "");
 		return buttonPanel;
 	}
+
+	public JButton getAddBtn() {
+		return addBtn;
+	}
+
+	public JButton getDeleteBtn() {
+		return deleteBtn;
+	}
+
+	public JButton getCloseBtn() {
+		return closeBtn;
+	}
+
+	public JTable getDeductionsTable() {
+		return deductionsTable;
+	}
+
+	public JButton getSaveBtn() {
+		return saveBtn;
+	}
+	
+	
 
 }

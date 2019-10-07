@@ -2,20 +2,22 @@ package swing.view;
 
 import java.awt.HeadlessException;
 
+import javax.swing.DefaultDesktopManager;
+import javax.swing.DesktopManager;
+import javax.swing.JComponent;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-
-import swing.controller.DeductionViewController;
-import swing.controller.NetIncomeViewController;
 
 public class MainFrame extends JFrame {
 
 	private JMenuItem deductionItem;
 	private JMenuItem netIncomeItem;
+	private JDesktopPane contentPane;
 
 	public MainFrame() throws HeadlessException {
 		this.setTitle("Money Manager 1.0");
@@ -27,10 +29,13 @@ public class MainFrame extends JFrame {
 	}
 
 	private void init() {
+		contentPane = new JDesktopPane();
+		setContentPane(contentPane);
+		contentPane.setDesktopManager(new DefaultDesktopManager());
 		JMenuBar menuBar = buildMenu();
 		setJMenuBar(menuBar);
-		setVisible(true);
 		setSize(800, 800);
+		setLocationRelativeTo(null);
 		JOptionPane.showMessageDialog(this, "Let's talk money!");
 	}
 
@@ -53,5 +58,8 @@ public class MainFrame extends JFrame {
 	public JMenuItem getNetIncomeItem() {
 		return netIncomeItem;
 	}
+
+
+	
 
 }

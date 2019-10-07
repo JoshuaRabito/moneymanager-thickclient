@@ -9,6 +9,12 @@ public class Deduction implements Serializable{
 	private DeductionType type;
 	private Double amount;
 	
+	
+	
+	public Deduction() {
+		
+	}
+
 	public Deduction(String name, DeductionType type, Double amount) {
 		super();
 		this.name = name;
