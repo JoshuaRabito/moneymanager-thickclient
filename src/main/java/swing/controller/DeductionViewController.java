@@ -1,7 +1,10 @@
 package swing.controller;
 
+import java.math.BigDecimal;
+
 import swing.api.Deduction;
 import swing.api.DeductionTableModel;
+import swing.api.DeductionType;
 import swing.view.DeductionView;
 
 public enum DeductionViewController {
@@ -16,6 +19,7 @@ public enum DeductionViewController {
 
 	private void initView() {
 		view = new DeductionView();
+		view.setVisible(true);
 		bindListeners();
 		populateCombos();
 
@@ -25,7 +29,13 @@ public enum DeductionViewController {
 		view.getAddBtn().addActionListener(e -> {
 			DeductionTableModel model 
 				= (DeductionTableModel) view.getDeductionsTable().getModel();
-			model.addDeduction(new Deduction());
+			model.addDeduction(new Deduction("Rent", DeductionType.RENT, BigDecimal.valueOf(1152.0)));
+		});
+		
+		view.getDeleteBtn().addActionListener(e -> {
+			DeductionTableModel model 
+			= (DeductionTableModel) view.getDeductionsTable().getModel();
+			model.removeDeduction(view.getDeductionsTable().getSelectedRow());
 		});
 
 	}

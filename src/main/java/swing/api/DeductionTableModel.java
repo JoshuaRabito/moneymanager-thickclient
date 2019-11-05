@@ -1,9 +1,9 @@
 package swing.api;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
 public class DeductionTableModel extends AbstractTableModel {
@@ -11,19 +11,14 @@ public class DeductionTableModel extends AbstractTableModel {
 	private List<Deduction> deductions;
 
 	private DeductionColumns[] columnNames = DeductionColumns.values();
+	private final Class[] columnClass = new Class[] { String.class, DeductionType.class, BigDecimal.class };
 
 	public DeductionTableModel() {
-		this.deductions = new ArrayList<>();
+		deductions = new ArrayList<>();
 	}
 
-	public void addDeduction(Deduction deduction) {
-		deductions.add(deduction);
-		fireTableRowsInserted(deductions.size() - 1, deductions.size());
-	}
-
-	@Override
-	public int getRowCount() {
-		return deductions.size();
+	public DeductionTableModel(List<Deduction> deductions) {
+		this.deductions = deductions;
 	}
 
 	@Override
@@ -32,67 +27,94 @@ public class DeductionTableModel extends AbstractTableModel {
 	}
 
 	@Override
-	public String getColumnName(int columnIndex) {
-
-		return columnNames[columnIndex].getDisplayName();
+	public String getColumnName(int column) {
+		return columnNames[column].getDisplayName();
 	}
+
+	@Override
+	public int getRowCount() {
+		return deductions.size();
+	}
+
+//	@Override
+//	public Class getColumnClass(int column) {
+//		switch (column) {
+//
+//		case 1:
+//			return String.class;
+//		case 2:
+//			return DeductionType.class;
+//		default:
+//			return BigDecimal.class;
+//		}
+//	}
 
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		return null;
+		return columnClass[columnIndex];
 	}
 
 	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		switch (columnIndex) {
-		case 0:
-			return deductions.get(rowIndex).getName();
-		case 1:
-			return deductions.get(rowIndex).getType();
+	public boolean isCellEditable(int row, int column) {
+		switch (column) {
 		case 2:
-			return deductions.get(rowIndex).getAmount();
-
+			return true; // only the amount is editable
+		default:
+			return false;
 		}
-		return null;
 	}
 
 	@Override
-	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		switch (columnIndex) {
+	public Object getValueAt(int row, int column) {
+		Deduction deduction = getDeduction(row);
+
+		switch (column) {
 		case 0:
-			if (aValue instanceof String) {
-				deductions.get(rowIndex).setName((String) aValue);
-			}
-			
+			return deduction.getName();
 		case 1:
-			if(aValue instanceof DeductionType) {
-				deductions.get(rowIndex).setType((DeductionType) aValue);
-			}
-			
+			return deduction.getType();
 		case 2:
-			if(aValue instanceof Double) {
-				deductions.get(rowIndex).setAmount((Double) aValue);
-			}
+			return deduction.getAmount();
+		default:
+			return null;
+		}
+	}
+
+	@Override
+	public void setValueAt(Object value, int row, int column) {
+		Deduction deduction = getDeduction(row);
+
+		switch (column) {
+		case 0:
+			deduction.setName((String) value);
+			break;
+		case 1:
+			deduction.setType((DeductionType) value);
+			break;
+		case 2:
+			deduction.setAmount((BigDecimal) value);
+			break;
 		}
 
+		fireTableCellUpdated(row, column);
 	}
 
-	@Override
-	public void addTableModelListener(TableModelListener l) {
-		// TODO Auto-generated method stub
-
+	public Deduction getDeduction(int row) {
+		return deductions.get(row);
 	}
 
-	@Override
-	public void removeTableModelListener(TableModelListener l) {
-		// TODO Auto-generated method stub
+	public void addDeduction(Deduction deduction) {
+		insertDeduction(getRowCount(), deduction);
+	}
 
+	public void insertDeduction(int row, Deduction deduction) {
+		deductions.add(row, deduction);
+		fireTableRowsInserted(row, row);
+	}
+
+	public void removeDeduction(int row) {
+		deductions.remove(row);
+		fireTableRowsDeleted(row, row);
 	}
 
 }

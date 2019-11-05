@@ -1,13 +1,14 @@
 package swing.api;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class Deduction implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private DeductionType type;
-	private Double amount;
+	private BigDecimal amount;
 	
 	
 	
@@ -15,7 +16,7 @@ public class Deduction implements Serializable{
 		
 	}
 
-	public Deduction(String name, DeductionType type, Double amount) {
+	public Deduction(String name, DeductionType type, BigDecimal amount) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -38,11 +39,11 @@ public class Deduction implements Serializable{
 		this.type = type;
 	}
 
-	public Double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Double amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	} 
 	

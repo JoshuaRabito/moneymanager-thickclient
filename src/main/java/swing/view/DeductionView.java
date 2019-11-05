@@ -35,12 +35,10 @@ public class DeductionView extends JInternalFrame implements Closeable{
 
 	private void init() {
 		setTitle("Deductions");
-		setVisible(true);
 		setClosable(true);
-		setIconifiable(true);
 		setMaximizable(true);
 		setResizable(true);
-		setSize(700, 700);
+		setSize(600, 500);
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addVetoableChangeListener(this::closePrompt);
@@ -57,13 +55,13 @@ public class DeductionView extends JInternalFrame implements Closeable{
 
 	private void buildForm() {
         JPanel formPanel = new JPanel(new MigLayout());   
+        
         deductionsTable = new JTable(new DeductionTableModel());
         JScrollPane jScrollPane = new JScrollPane(deductionsTable);
         formPanel.add(jScrollPane, "cell 0 0");
         JPanel buttonPanel = buildButtonPanel();
         formPanel.add(buttonPanel, "cell 0 1");
-        add(formPanel);
-        
+        add(formPanel);     
        
 	}
 
