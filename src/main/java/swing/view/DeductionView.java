@@ -67,11 +67,9 @@ public class DeductionView extends JInternalFrame implements Closeable{
 
 	private JPanel buildButtonPanel() {
 		JPanel buttonPanel = new JPanel(new MigLayout("", "[center, grow]"));
-		saveBtn = new JButton("Save");
         addBtn = new JButton("Add");
         deleteBtn = new JButton("Delete");
         closeBtn = new JButton("Close");
-        buttonPanel.add(saveBtn, "");
         buttonPanel.add(addBtn, "");
         buttonPanel.add(deleteBtn, "");
         buttonPanel.add(closeBtn, "");
