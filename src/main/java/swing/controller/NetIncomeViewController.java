@@ -7,10 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import swing.api.AccountType;
+import swing.api.ViewActions;
 import swing.view.DeductionView;
 import swing.view.NetIncomeView;
 
-public enum NetIncomeViewController {
+public enum NetIncomeViewController implements ViewActions<NetIncomeView>{
 	INSTANCE;
 
 	private NetIncomeView view;
@@ -26,7 +27,8 @@ public enum NetIncomeViewController {
 		populateCombos();
 	}
 
-	private void bindListeners() {
+	@Override
+	public void bindListeners() {
 		view.getDeductBtn().addActionListener(e -> openDeductionForm());
 		view.getClearBtn().addActionListener(e -> clearForm());
 		view.getCalcBtn().addActionListener(e -> calculateTotal());
@@ -39,14 +41,12 @@ public enum NetIncomeViewController {
 
 			topFrame.add(deductionView);
 			
-	
-
-			
 		});
 
 	}
 
-	private void clearForm() {
+	@Override
+	public void clearForm() {
 
 	}
 
@@ -54,11 +54,13 @@ public enum NetIncomeViewController {
 
 	}
 
-	private void populateCombos() {
+	@Override
+	public void populateCombos() {
 		view.getAccountTypeCombo().setModel(new DefaultComboBoxModel<>(AccountType.values()));
 
 	}
 
+	@Override
 	public NetIncomeView getView() {
 		return view;
 	}

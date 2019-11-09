@@ -36,19 +36,6 @@ public class DeductionTableModel extends AbstractTableModel {
 		return deductions.size();
 	}
 
-//	@Override
-//	public Class getColumnClass(int column) {
-//		switch (column) {
-//
-//		case 1:
-//			return String.class;
-//		case 2:
-//			return DeductionType.class;
-//		default:
-//			return BigDecimal.class;
-//		}
-//	}
-
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		return columnClass[columnIndex];
