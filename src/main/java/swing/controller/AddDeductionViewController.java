@@ -2,7 +2,7 @@ package swing.controller;
 
 import java.math.BigDecimal;
 import javax.swing.DefaultComboBoxModel;
-import swing.api.Deduction;
+import model.Deduction;
 import swing.api.DeductionType;
 import swing.api.ViewActions;
 import swing.view.AddDeductionView;
