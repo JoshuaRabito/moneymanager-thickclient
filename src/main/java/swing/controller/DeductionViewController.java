@@ -1,15 +1,10 @@
 package swing.controller;
 
-import java.beans.PropertyVetoException;
-import java.math.BigDecimal;
-
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-
-import swing.api.ViewActions;
 import swing.api.Deduction;
 import swing.api.DeductionTableModel;
-import swing.api.DeductionType;
+import swing.api.ViewActions;
 import swing.view.AddDeductionView;
 import swing.view.DeductionView;
 

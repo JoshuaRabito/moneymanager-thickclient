@@ -1,22 +1,13 @@
 package swing.view;
 
 import java.beans.PropertyChangeEvent;
-
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
 import net.miginfocom.swing.MigLayout;
 import swing.api.Closeable;
 import swing.api.DeductionTableModel;

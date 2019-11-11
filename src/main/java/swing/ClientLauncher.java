@@ -1,12 +1,8 @@
 package swing;
 
 import static javax.swing.UIManager.setLookAndFeel;
-
 import javax.swing.SwingUtilities;
 import javax.swing.UnsupportedLookAndFeelException;
-
-import com.jtattoo.plaf.aluminium.AluminiumLookAndFeel;
-
 import swing.controller.MainFrameController;
 
 
