@@ -36,7 +36,25 @@
 		    <artifactId>commons-lang3</artifactId>
 		    <version>3.8.1</version>
 		</dependency>      
+		<dependency>
+			<groupId>com.jtattoo</groupId>
+			<artifactId>JTattoo</artifactId>
+			<version>1.6.7</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.seaglasslookandfeel</groupId>
+		    <artifactId>seaglasslookandfeel</artifactId>
+		    <version>0.2.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.jtattoo</groupId>
+		    <artifactId>JTattoo</artifactId>
+		    <version>1.6.12</version>
+		</dependency>
+		
 
+
+		
     </dependencies>
 
 

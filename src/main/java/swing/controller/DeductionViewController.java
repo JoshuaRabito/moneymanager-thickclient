@@ -70,4 +70,9 @@ public enum DeductionViewController implements ViewActions<DeductionView>{
 		
 	}
 
+	public void addDeduction(Deduction deduction) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

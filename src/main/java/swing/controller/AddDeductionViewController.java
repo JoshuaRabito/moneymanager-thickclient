@@ -1,8 +1,11 @@
 package swing.controller;
 
+import java.math.BigDecimal;
+
 import javax.swing.DefaultComboBoxModel;
 
 import swing.api.AccountType;
+import swing.api.Deduction;
 import swing.api.DeductionType;
 import swing.api.ViewActions;
 import swing.view.AddDeductionView;
@@ -27,7 +30,21 @@ public enum AddDeductionViewController implements ViewActions<AddDeductionView>{
 
 	@Override
 	public void bindListeners() {
+		view.getSaveBtn().addActionListener(e -> saveDeduction());
+	}
+
+	private void saveDeduction() {
+		Deduction deduction = buildDeduction();
+		DeductionViewController.INSTANCE.addDeduction(deduction);
 		
+	}
+
+	private Deduction buildDeduction() {
+		Deduction deduction = new Deduction();
+		deduction.setAmount(BigDecimal.valueOf(Double.valueOf(view.getAmountTxt().getText())));
+		deduction.setName(view.getNameTxt().getName());
+		deduction.setType(DeductionType.valueOf(view.getTypeCombo().getModel().getSelectedItem().toString()));
+		return deduction;
 	}
 
 	@Override

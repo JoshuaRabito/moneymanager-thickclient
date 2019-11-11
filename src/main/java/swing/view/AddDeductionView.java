@@ -53,14 +53,14 @@ public class AddDeductionView extends JInternalFrame implements Closeable {
 
 		JPanel formPanel = new JPanel(new MigLayout());
 		JPanel buttonPanel = buildButtonPanel();
-
-		// column row
-		formPanel.add(nameLabel, "cell 0 0");
-		formPanel.add(nameTxt, "cell 1 0");
-		formPanel.add(typeLabel, "cell 0 1");
-		formPanel.add(typeCombo, "cell 1 1");
-		formPanel.add(amountLabel, "cell 0 2");
-		formPanel.add(amountTxt, "cell 1 2");
+		
+		formPanel.add(greetingLabel, "span, center, gapbottom 15");
+		formPanel.add(nameLabel, "align label");
+		formPanel.add(nameTxt, "wrap");
+		formPanel.add(typeLabel, "align label");
+		formPanel.add(typeCombo, "wrap");
+		formPanel.add(amountLabel, "align label");
+		formPanel.add(amountTxt);
 		formPanel.add(buttonPanel, "dock south");
 		add(formPanel);
 
