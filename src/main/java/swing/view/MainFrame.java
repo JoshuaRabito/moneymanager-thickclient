@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
 
 	private JMenuItem deductionItem;
 	private JMenuItem netIncomeItem;
-	private JDesktopPane contentPane;
+	public static JDesktopPane contentPane = new JDesktopPane();
 
 	public MainFrame() throws HeadlessException {
 		this.setTitle("Money Manager 1.0");
@@ -29,7 +29,6 @@ public class MainFrame extends JFrame {
 	}
 
 	private void init() {
-		contentPane = new JDesktopPane();
 		setContentPane(contentPane);
 		contentPane.setDesktopManager(new DefaultDesktopManager());
 		JMenuBar menuBar = buildMenu();
@@ -63,9 +62,6 @@ public class MainFrame extends JFrame {
 		return contentPane;
 	}
 	
-	
-
-
 	
 
 }

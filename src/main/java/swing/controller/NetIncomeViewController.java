@@ -9,6 +9,7 @@ import javax.swing.SwingUtilities;
 import swing.api.AccountType;
 import swing.api.ViewActions;
 import swing.view.DeductionView;
+import swing.view.MainFrame;
 import swing.view.NetIncomeView;
 
 public enum NetIncomeViewController implements ViewActions<NetIncomeView>{
@@ -37,9 +38,7 @@ public enum NetIncomeViewController implements ViewActions<NetIncomeView>{
 	private void openDeductionForm() {
 		SwingUtilities.invokeLater(() -> {
 			DeductionView deductionView = DeductionViewController.INSTANCE.getView();
-			JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(view);
-
-			topFrame.add(deductionView);
+			MainFrame.contentPane.add(deductionView);
 			
 		});
 

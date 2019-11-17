@@ -2,6 +2,7 @@ package swing.controller;
 
 import java.beans.PropertyVetoException;
 import java.math.BigDecimal;
+import java.util.stream.Stream;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -12,6 +13,7 @@ import swing.api.DeductionTableModel;
 import swing.api.DeductionType;
 import swing.view.AddDeductionView;
 import swing.view.DeductionView;
+import swing.view.MainFrame;
 
 public enum DeductionViewController implements ViewActions<DeductionView>{
 	INSTANCE;
@@ -34,14 +36,14 @@ public enum DeductionViewController implements ViewActions<DeductionView>{
 	@Override
 	public void bindListeners() {
 		view.getAddBtn().addActionListener(e -> {
-//			DeductionTableModel model 
-//				= (DeductionTableModel) view.getDeductionsTable().getModel();
-//			model.addDeduction(new Deduction("Rent", DeductionType.RENT, BigDecimal.valueOf(1152.0)));
 			SwingUtilities.invokeLater(() ->{
 			AddDeductionView addView = AddDeductionViewController.INSTANCE.getView();
-			JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(view);
-
-			topFrame.add(addView);
+			boolean isViewAdded = Stream.of(MainFrame.contentPane.getComponents()).anyMatch(i -> i instanceof AddDeductionView);
+			if(!isViewAdded) {
+				MainFrame.contentPane.add(addView);
+				addView.moveToFront();
+			}
+			
 			});
 		});
 		
