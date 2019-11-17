@@ -1,7 +1,8 @@
-package swing.api;
+package model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import swing.api.DeductionType;
 
 public class Deduction implements Serializable{
 	

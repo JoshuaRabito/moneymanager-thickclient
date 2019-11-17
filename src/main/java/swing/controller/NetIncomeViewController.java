@@ -1,11 +1,8 @@
 package swing.controller;
 
-import java.awt.Component;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-
 import swing.api.AccountType;
 import swing.api.ViewActions;
 import swing.view.DeductionView;
