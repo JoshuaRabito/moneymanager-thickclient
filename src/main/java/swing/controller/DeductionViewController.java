@@ -51,8 +51,8 @@ public enum DeductionViewController implements ViewActions<DeductionView>{
 		view.getDeleteBtn().addActionListener(e -> {
 			DeductionTableModel model 
 			= (DeductionTableModel) view.getDeductionsTable().getModel();
-			model.removeDeduction(view.getDeductionsTable().getSelectedRow());
 			DeductionsInMemory.INSTANCE.remove(model.getDeduction(view.getDeductionsTable().getSelectedRow()));
+			model.removeDeduction(view.getDeductionsTable().getSelectedRow());		
 		});
 		
 		view.getCloseBtn().addActionListener(e -> close());
