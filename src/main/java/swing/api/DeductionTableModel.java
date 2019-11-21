@@ -104,5 +104,13 @@ public class DeductionTableModel extends AbstractTableModel {
 		deductions.remove(row);
 		fireTableRowsDeleted(row, row);
 	}
+	
+	public void removeAllDeductions() {
+		for (int i = 0; i < deductions.size(); i++) {
+			deductions.remove(i);
+			fireTableRowsDeleted(i,i);
+		}
+		
+	}
 
 }

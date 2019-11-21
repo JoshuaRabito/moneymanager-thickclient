@@ -1,15 +1,15 @@
 package swing.controller;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+
 import swing.api.AccountType;
-import swing.api.ViewActions;
+import swing.api.ViewableCombo;
 import swing.view.DeductionView;
 import swing.view.MainFrame;
 import swing.view.NetIncomeView;
 
-public enum NetIncomeViewController implements ViewActions<NetIncomeView>{
+public enum NetIncomeViewController implements ViewableCombo<NetIncomeView>{
 	INSTANCE;
 
 	private NetIncomeView view;
@@ -43,7 +43,9 @@ public enum NetIncomeViewController implements ViewActions<NetIncomeView>{
 
 	@Override
 	public void clearForm() {
-
+		view.getAmountText().setText("");
+		view.getAccountTypeCombo().setSelectedItem(null);
+//		view.getDeductionList().set
 	}
 
 	private void calculateTotal() {
@@ -59,6 +61,12 @@ public enum NetIncomeViewController implements ViewActions<NetIncomeView>{
 	@Override
 	public NetIncomeView getView() {
 		return view;
+	}
+
+	@Override
+	public void close() {
+		view.dispose();
+		
 	}
 
 }

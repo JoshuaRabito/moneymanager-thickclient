@@ -38,7 +38,7 @@ public class NetIncomeView extends JInternalFrame implements Closeable{
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setSize(700, 700);
+        setSize(600, 500);
 
         
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -73,17 +73,19 @@ public class NetIncomeView extends JInternalFrame implements Closeable{
         JPanel buttonPanel = new JPanel(new MigLayout("", "[center, grow]"));
         buttonPanel.add(clearBtn, "");
         buttonPanel.add(calcBtn, "");
+        buttonPanel.add(deductBtn );
+
         
         
-        formPanel.add(greetinglbl, "cell 0 0");
-        formPanel.add(accountTypeLbl, "cell 0 1");
-        formPanel.add(accountTypeCombo, "cell 1 1");
-        formPanel.add(payAmountLbl, "cell 0 2");
-        formPanel.add(amountText, "cell 1 2");
-        formPanel.add(dedctionLbl, "cell 0 3");
+        formPanel.add(greetinglbl, "span, center, gapbottom 15");
+        formPanel.add(accountTypeLbl, "align label");
+        formPanel.add(accountTypeCombo, "wrap");
+        formPanel.add(payAmountLbl, "align label");
+        formPanel.add(amountText, "wrap");
+        formPanel.add(dedctionLbl, "wrap");
 //        formPanel.add(deductionList, "cell 1 3");
-        formPanel.add(deductBtn, "cell 1 3");
         formPanel.add(buttonPanel, "dock south");
+        
         add(formPanel);
         
     }
@@ -94,6 +96,10 @@ public class NetIncomeView extends JInternalFrame implements Closeable{
 
 	public JList<DeductionType> getDeductionList() {
 		return deductionList;
+	}
+
+	public JTextField getAmountText() {
+		return amountText;
 	}
 
 	public JButton getDeductBtn() {

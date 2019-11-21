@@ -27,21 +27,24 @@ public enum DeductionViewController implements ViewActions<DeductionView>{
 		view = new DeductionView();
 		view.setVisible(true);
 		bindListeners();
-		populateCombos();
 
 	}
 	
 	@Override
 	public void bindListeners() {
 		view.getAddBtn().addActionListener(e -> {
-			SwingUtilities.invokeLater(() ->{
-			AddDeductionView addView = AddDeductionViewController.INSTANCE.getView();
-			boolean isViewAdded = Stream.of(MainFrame.contentPane.getComponents()).anyMatch(i -> i instanceof AddDeductionView);
-			if(!isViewAdded) {
+			SwingUtilities.invokeLater(() -> {
+				
+				AddDeductionView addView = AddDeductionViewController.INSTANCE.getView();
 				MainFrame.contentPane.add(addView);
-				addView.moveToFront();
-			}
-			
+				addView.toFront();
+				addView.setVisible(true);
+				try {
+					addView.setSelected(true);
+				} catch (PropertyVetoException ex) {
+					ex.printStackTrace();
+				}
+
 			});
 		});
 		
@@ -49,13 +52,10 @@ public enum DeductionViewController implements ViewActions<DeductionView>{
 			DeductionTableModel model 
 			= (DeductionTableModel) view.getDeductionsTable().getModel();
 			model.removeDeduction(view.getDeductionsTable().getSelectedRow());
+			DeductionsInMemory.INSTANCE.remove(model.getDeduction(view.getDeductionsTable().getSelectedRow()));
 		});
-
-	}
-
-	@Override
-	public void populateCombos() {
-		// TODO Auto-generated method stub
+		
+		view.getCloseBtn().addActionListener(e -> close());
 
 	}
 
@@ -66,12 +66,19 @@ public enum DeductionViewController implements ViewActions<DeductionView>{
 
 	@Override
 	public void clearForm() {
-		// TODO Auto-generated method stub
-		
+		DeductionTableModel model = (DeductionTableModel)view.getDeductionsTable().getModel();
+		model.removeAllDeductions();
 	}
 
 	public void addDeduction(Deduction deduction) {
-		// TODO Auto-generated method stub
+		DeductionTableModel model = (DeductionTableModel) view.getDeductionsTable().getModel();
+		model.addDeduction(deduction);
+		
+	}
+
+	@Override
+	public void close() {
+		view.dispose();
 		
 	}
 
