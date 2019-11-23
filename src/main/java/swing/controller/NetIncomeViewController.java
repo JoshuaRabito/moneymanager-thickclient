@@ -1,11 +1,14 @@
 package swing.controller;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.SwingUtilities;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Set;
 
+import javax.swing.DefaultComboBoxModel;
+
+import model.Deduction;
 import swing.api.AccountType;
 import swing.api.ViewableCombo;
-import swing.view.DeductionView;
 import swing.view.MainFrame;
 import swing.view.NetIncomeView;
 
@@ -16,7 +19,6 @@ public enum NetIncomeViewController implements ViewableCombo<NetIncomeView>{
 
 	private NetIncomeViewController() {
 		initView();
-
 	}
 
 	private void initView() {
@@ -27,29 +29,35 @@ public enum NetIncomeViewController implements ViewableCombo<NetIncomeView>{
 
 	@Override
 	public void bindListeners() {
-		view.getDeductBtn().addActionListener(e -> openDeductionForm());
+		view.getCloseBtn().addActionListener(e -> close());
 		view.getClearBtn().addActionListener(e -> clearForm());
 		view.getCalcBtn().addActionListener(e -> calculateTotal());
+		view.getAddDeductionsBtn().addActionListener(e -> addDeductions());
 	}
 
-	private void openDeductionForm() {
-		SwingUtilities.invokeLater(() -> {
-			DeductionView deductionView = DeductionViewController.INSTANCE.getView();
-			MainFrame.contentPane.add(deductionView);
-			
-		});
 
+	private void addDeductions() {
+		Set<Deduction> deductions = DeductionsInMemory.INSTANCE.getDeductions();
+		view.getDeductionList().setListData(deductions.toArray(new Deduction[deductions.size()]));
+		
 	}
 
 	@Override
 	public void clearForm() {
-		view.getAmountText().setText("");
+		view.getGrossAmountTxt().setText("");
 		view.getAccountTypeCombo().setSelectedItem(null);
-//		view.getDeductionList().set
+		view.getDeductionList().setListData(new Deduction[0]);
 	}
 
 	private void calculateTotal() {
-
+		Set<Deduction> deductions = DeductionsInMemory.INSTANCE.getDeductions();
+		BigDecimal grossAmount = BigDecimal.valueOf(Double.valueOf(view.getGrossAmountTxt().getText()));
+		for (Deduction deduction : deductions) {
+			grossAmount = grossAmount.subtract(deduction.getAmount());
+		}
+		
+		view.getNetAmountText().setValue(grossAmount);
+		
 	}
 
 	@Override
@@ -65,8 +73,7 @@ public enum NetIncomeViewController implements ViewableCombo<NetIncomeView>{
 
 	@Override
 	public void close() {
-		view.dispose();
-		
+		MainFrame.contentPane.getDesktopManager().closeFrame(view);	
 	}
 
 }

@@ -1,7 +1,7 @@
 package swing.api;
 
 public enum DeductionType {
-	RENT("Rent"), MED("Medical"), Food("Food"), UTIL("Utility"),
+	RENT("Rent"), MED("Medical"), FOOD("Food"), UTIL("Utility"),
 	CAR("Car"), OTHER("Other"), SAVING("Savings");
 
 	private String type;

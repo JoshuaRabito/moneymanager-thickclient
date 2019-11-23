@@ -84,7 +84,7 @@ public class Deduction implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Deduction [name=" + name + ", type=" + type + ", amount=" + amount + "]";
+		return "Deduction - " + name + " " +amount + " , "+ type;
 	} 
 	
 	
