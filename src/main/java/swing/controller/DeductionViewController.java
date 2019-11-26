@@ -54,6 +54,8 @@ public enum DeductionViewController implements ViewActions<DeductionView>{
 		});
 		
 		view.getCloseBtn().addActionListener(e -> close());
+		
+		view.getClearBtn().addActionListener(e -> clearForm());
 
 	}
 

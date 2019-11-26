@@ -19,6 +19,7 @@ public class DeductionView extends JInternalFrame implements Closeable{
 	private JButton closeBtn;
 	private JTable deductionsTable;
 	private JButton saveBtn;
+	private JButton clearBtn;
 
 	public DeductionView() {
 		init();
@@ -61,9 +62,11 @@ public class DeductionView extends JInternalFrame implements Closeable{
         addBtn = new JButton("Add");
         deleteBtn = new JButton("Delete");
         closeBtn = new JButton("Close");
+        clearBtn = new JButton("Clear");
         buttonPanel.add(addBtn, "");
         buttonPanel.add(deleteBtn, "");
-        buttonPanel.add(closeBtn, "");
+        buttonPanel.add(clearBtn, "");
+        buttonPanel.add(closeBtn, "");    
 		return buttonPanel;
 	}
 
@@ -86,7 +89,9 @@ public class DeductionView extends JInternalFrame implements Closeable{
 	public JButton getSaveBtn() {
 		return saveBtn;
 	}
-	
-	
 
+	public JButton getClearBtn() {
+		return clearBtn;
+	}
+	
 }
