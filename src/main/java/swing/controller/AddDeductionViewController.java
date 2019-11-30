@@ -7,6 +7,7 @@ import javax.swing.DefaultComboBoxModel;
 import model.Deduction;
 import swing.api.DeductionType;
 import swing.api.ViewableCombo;
+import swing.validator.AddDeductionViewValidator;
 import swing.view.AddDeductionView;
 import swing.view.MainFrame;
 
@@ -14,9 +15,11 @@ public enum AddDeductionViewController implements ViewableCombo<AddDeductionView
 	INSTANCE;
 	
 	private AddDeductionView view;
+	private AddDeductionViewValidator validator;
 
-	private AddDeductionViewController() {
+	private AddDeductionViewController() {		
 		initView();
+		validator = new AddDeductionViewValidator(view);
 	}
 
 	private void initView() {
@@ -34,10 +37,11 @@ public enum AddDeductionViewController implements ViewableCombo<AddDeductionView
 	}
 
 	private void saveDeduction() {
-		Deduction deduction = buildDeduction();
-		DeductionViewController.INSTANCE.addDeduction(deduction);
-		DeductionsInMemory.INSTANCE.add(deduction);
-		
+		if(validator.validate(view.getAmountTxt().getText(), view.getNameTxt().getText())) {
+			Deduction deduction = buildDeduction();
+			DeductionViewController.INSTANCE.addDeduction(deduction);
+			DeductionsInMemory.INSTANCE.add(deduction);
+		}				
 	}
 
 	private Deduction buildDeduction() {

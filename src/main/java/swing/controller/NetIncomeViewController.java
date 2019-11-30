@@ -9,6 +9,7 @@ import javax.swing.DefaultComboBoxModel;
 import model.Deduction;
 import swing.api.AccountType;
 import swing.api.ViewableCombo;
+import swing.validator.NetIncomeViewValidator;
 import swing.view.MainFrame;
 import swing.view.NetIncomeView;
 
@@ -16,6 +17,7 @@ public enum NetIncomeViewController implements ViewableCombo<NetIncomeView>{
 	INSTANCE;
 
 	private NetIncomeView view;
+	private NetIncomeViewValidator validator;
 
 	private NetIncomeViewController() {
 		initView();
@@ -23,6 +25,7 @@ public enum NetIncomeViewController implements ViewableCombo<NetIncomeView>{
 
 	private void initView() {
 		view = new NetIncomeView();
+		validator = new NetIncomeViewValidator(view);
 		bindListeners();
 		populateCombos();
 	}
@@ -50,14 +53,16 @@ public enum NetIncomeViewController implements ViewableCombo<NetIncomeView>{
 	}
 
 	private void calculateTotal() {
-		Set<Deduction> deductions = DeductionsInMemory.INSTANCE.getDeductions();
-		BigDecimal grossAmount = BigDecimal.valueOf(Double.valueOf(view.getGrossAmountTxt().getText()));
-		for (Deduction deduction : deductions) {
-			grossAmount = grossAmount.subtract(deduction.getAmount());
-		}
-		
-		view.getNetAmountText().setValue(grossAmount);
-		
+		boolean isValid = validator.validate(view.getGrossAmountTxt().getText(), view.getDeductionList().getModel());
+		if(isValid) {
+			Set<Deduction> deductions = DeductionsInMemory.INSTANCE.getDeductions();
+			BigDecimal grossAmount = BigDecimal.valueOf(Double.valueOf(view.getGrossAmountTxt().getText()));
+			for (Deduction deduction : deductions) {
+				grossAmount = grossAmount.subtract(deduction.getAmount());
+			}
+			
+			view.getNetAmountText().setValue(grossAmount);
+		}	
 	}
 
 	@Override
