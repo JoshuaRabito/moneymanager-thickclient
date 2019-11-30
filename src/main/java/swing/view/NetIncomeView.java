@@ -140,7 +140,4 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 	public JButton getAddDeductionsBtn() {
 		return addDeductionsBtn;
 	}
-	
-	
-
 }
