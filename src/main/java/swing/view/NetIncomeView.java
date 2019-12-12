@@ -1,9 +1,8 @@
 package swing.view;
 
-import java.awt.Component;
+import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,14 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import model.Deduction;
 import net.miginfocom.swing.MigLayout;
 import swing.api.AccountType;
 import swing.api.Closeable;
-import swing.api.DeductionType;
 
 public class NetIncomeView extends JInternalFrame implements Closeable {
 
@@ -30,6 +27,7 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 	private JButton closeBtn;
 	private JButton clearBtn;
 	private JButton calcBtn;
+	private JButton saveBtn;
 	private JButton addDeductionsBtn;
 	private JFormattedTextField netAmountText;
 
@@ -44,7 +42,7 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 		setIconifiable(true);
 		setMaximizable(true);
 		setResizable(true);
-		setSize(600, 500);
+		setSize(500, 500);
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addVetoableChangeListener(this::closePrompt);
@@ -68,16 +66,18 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 	private JPanel buildFormPanel() {
 		JPanel formPanel = new JPanel(new MigLayout());
 		JLabel greetinglbl = new JLabel("Lets Manage some money!");
-		JLabel accountTypeLbl = new JLabel("Account Type");
+		greetinglbl.setFont(greetinglbl.getFont().deriveFont(Font.BOLD | Font.ITALIC, 18));
+
+		JLabel accountTypeLbl = new JLabel("Account Type:");
 		accountTypeCombo = new JComboBox<>();
 		JLabel payAmountLbl = new JLabel("Gross amount:");
 		grossAmountTxt = new JFormattedTextField(new DecimalFormat("#####.##"));
 		grossAmountTxt.setColumns(7);
 		grossAmountTxt.setEditable(true);
-		JLabel dedctionLbl = new JLabel("Deductions");
+		JLabel dedctionLbl = new JLabel("Deductions:");
 		deductionList = new JList<>();
 		addDeductionsBtn = new JButton("Add Deductions");
-		JLabel netAmountLbl = new JLabel("Net Amount");
+		JLabel netAmountLbl = new JLabel("Net Amount:");
 		netAmountText = new JFormattedTextField(new DecimalFormat("#####.##"));
 		netAmountText.setColumns(7);
 		netAmountText.setEnabled(false);
@@ -103,9 +103,12 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 		closeBtn = new JButton("Close");
 		clearBtn = new JButton("Clear");
 		calcBtn = new JButton("Calculate");
+		saveBtn = new JButton("Save");
+		buttonPanel.add(saveBtn);
 		buttonPanel.add(calcBtn, "");
 		buttonPanel.add(clearBtn, "");
 		buttonPanel.add(closeBtn);
+
 		return buttonPanel;
 	}
 
@@ -123,6 +126,10 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 
 	public JFormattedTextField getNetAmountText() {
 		return netAmountText;
+	}
+
+	public JButton getSaveBtn() {
+		return saveBtn;
 	}
 
 	public JButton getCloseBtn() {

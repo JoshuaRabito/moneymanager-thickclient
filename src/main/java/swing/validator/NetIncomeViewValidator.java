@@ -19,7 +19,7 @@ import swing.view.NetIncomeView;
  * @since 11-29-19
  *
  */
-public class NetIncomeViewValidator {
+public class NetIncomeViewValidator {  
 
 	private NetIncomeView view;
 

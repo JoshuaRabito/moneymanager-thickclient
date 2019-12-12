@@ -36,13 +36,15 @@ public class MainFrame extends JFrame {
 
 	private JMenuBar buildMenu() {
 		JMenuBar menuBar = new JMenuBar();
-		JMenu jMenu = new JMenu("Options");
+		JMenu manageMenu = new JMenu("Manage");
 		deductionItem = new JMenuItem("Deductions");
 		netIncomeItem = new JMenuItem("Net Income");
+		JMenu optionsMenu = new JMenu("Options");
 
-		jMenu.add(deductionItem);
-		jMenu.add(netIncomeItem);
-		menuBar.add(jMenu);
+		manageMenu.add(deductionItem);
+		manageMenu.add(netIncomeItem);
+		menuBar.add(manageMenu);
+		menuBar.add(optionsMenu);//for import/export
 		return menuBar;
 	}
 
