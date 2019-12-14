@@ -78,6 +78,7 @@ public enum NetIncomeViewController implements ViewableCombo<NetIncomeView>{
 
 	@Override
 	public void close() {
+		clearForm();
 		MainFrame.contentPane.getDesktopManager().closeFrame(view);	
 	}
 

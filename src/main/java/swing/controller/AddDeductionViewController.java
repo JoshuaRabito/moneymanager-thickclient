@@ -73,6 +73,7 @@ public enum AddDeductionViewController implements ViewableCombo<AddDeductionView
 
 	@Override
 	public void close() {
+		clearForm();
 		MainFrame.contentPane.getDesktopManager().closeFrame(view);
 		
 	}
