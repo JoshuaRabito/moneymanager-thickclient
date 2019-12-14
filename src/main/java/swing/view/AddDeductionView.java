@@ -3,6 +3,7 @@ package swing.view;
 import java.beans.PropertyChangeEvent;
 import java.text.DecimalFormat;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -24,6 +25,7 @@ public class AddDeductionView extends JInternalFrame implements Closeable {
 	private JTextField nameTxt;
 	private JComboBox<DeductionType> typeCombo;
 	private JFormattedTextField amountTxt;
+	private JButton clearBtn;
 
 	public AddDeductionView() {
 		init();
@@ -72,6 +74,7 @@ public class AddDeductionView extends JInternalFrame implements Closeable {
 	private JPanel buildButtonPanel() {
 		JPanel buttonPanel = new JPanel(new MigLayout("", "[center, grow]"));
 		saveBtn = new JButton("Save");
+		clearBtn = new JButton("Clear");
 		closeBtn = new JButton("Close");
 		buttonPanel.add(saveBtn, "");
 		buttonPanel.add(closeBtn, "");
@@ -104,6 +107,10 @@ public class AddDeductionView extends JInternalFrame implements Closeable {
 
 	public JTextField getAmountTxt() {
 		return amountTxt;
+	}
+
+	public JButton getClearBtn() {
+		return clearBtn;
 	}
 	
 	
