@@ -34,6 +34,7 @@ public enum AddDeductionViewController implements ViewableCombo<AddDeductionView
 	public void bindListeners() {
 		view.getSaveBtn().addActionListener(e -> saveDeduction());
 		view.getCloseBtn().addActionListener(e -> close());
+		view.getClearBtn().addActionListener(e -> close());
 	}
 
 	private void saveDeduction() {

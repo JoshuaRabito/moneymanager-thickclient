@@ -68,6 +68,7 @@ public enum DeductionViewController implements ViewActions<DeductionView>{
 	public void clearForm() {
 		DeductionTableModel model = (DeductionTableModel)view.getDeductionsTable().getModel();
 		model.removeAllDeductions();
+		DeductionsInMemory.INSTANCE.removeAll();
 	}
 
 	public void addDeduction(Deduction deduction) {

@@ -13,6 +13,7 @@ public class MainFrame extends JFrame {
 
 	private JMenuItem deductionItem;
 	private JMenuItem netIncomeItem;
+	private JMenuItem loadItem;
 	public static JDesktopPane contentPane = new JDesktopPane();
 
 	public MainFrame() throws HeadlessException {
@@ -39,10 +40,13 @@ public class MainFrame extends JFrame {
 		JMenu manageMenu = new JMenu("Manage");
 		deductionItem = new JMenuItem("Deductions");
 		netIncomeItem = new JMenuItem("Net Income");
-		JMenu optionsMenu = new JMenu("Options");
-
+		
 		manageMenu.add(deductionItem);
 		manageMenu.add(netIncomeItem);
+		
+		JMenu optionsMenu = new JMenu("Options");
+		loadItem = new JMenuItem("Load");
+		optionsMenu.add(loadItem);
 		menuBar.add(manageMenu);
 		menuBar.add(optionsMenu);//for import/export
 		return menuBar;

@@ -29,5 +29,10 @@ public enum DeductionsInMemory {
 		return copiedDeductions;
 	}
 
+	public void removeAll() {
+		deductionsInMemory = new HashSet<>();
+		
+	}
+
 
 }

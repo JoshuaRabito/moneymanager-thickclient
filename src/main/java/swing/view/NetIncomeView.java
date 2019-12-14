@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import model.Deduction;
@@ -30,6 +31,7 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 	private JButton saveBtn;
 	private JButton addDeductionsBtn;
 	private JFormattedTextField netAmountText;
+	private JTextField fNameTxt;
 
 	public NetIncomeView() {
 		init();
@@ -68,6 +70,8 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 		JLabel greetinglbl = new JLabel("Lets Manage some money!");
 		greetinglbl.setFont(greetinglbl.getFont().deriveFont(Font.BOLD | Font.ITALIC, 18));
 
+		JLabel fnameLbl = new JLabel("First name:");
+		fNameTxt = new JTextField();
 		JLabel accountTypeLbl = new JLabel("Account Type:");
 		accountTypeCombo = new JComboBox<>();
 		JLabel payAmountLbl = new JLabel("Gross amount:");
@@ -83,6 +87,8 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 		netAmountText.setEnabled(false);
 
 		formPanel.add(greetinglbl, "span, center, gapbottom 15");
+		formPanel.add(fnameLbl, "align label");
+		formPanel.add(fNameTxt, "                                                                                                                                                                                                                                       wrap");
 		formPanel.add(accountTypeLbl, "align label");
 		formPanel.add(accountTypeCombo, "wrap");
 		formPanel.add(payAmountLbl, "align label");
