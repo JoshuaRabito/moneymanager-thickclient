@@ -31,8 +31,12 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 	private JButton saveBtn;
 	private JButton addDeductionsBtn;
 	private JFormattedTextField netAmountText;
+<<<<<<< HEAD
 	private JTextField firstNameTxt;
 	private JTextField lastNameTxt;
+=======
+	private JTextField fNameTxt;
+>>>>>>> master
 
 	public NetIncomeView() {
 		init();
@@ -72,11 +76,15 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 		greetinglbl.setFont(greetinglbl.getFont().deriveFont(Font.BOLD | Font.ITALIC, 18));
 
 		JLabel fnameLbl = new JLabel("First name:");
+<<<<<<< HEAD
 		firstNameTxt = new JTextField();
 		firstNameTxt.setColumns(7);
 		JLabel lnameLbl = new JLabel("Last name:");
 		lastNameTxt = new JTextField();
 		lastNameTxt.setColumns(7);
+=======
+		fNameTxt = new JTextField();
+>>>>>>> master
 		JLabel accountTypeLbl = new JLabel("Account Type:");
 		accountTypeCombo = new JComboBox<>();
 		JLabel payAmountLbl = new JLabel("Gross amount:");
@@ -93,9 +101,13 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 
 		formPanel.add(greetinglbl, "span, center, gapbottom 15");
 		formPanel.add(fnameLbl, "align label");
+<<<<<<< HEAD
 		formPanel.add(firstNameTxt, "wrap");
 		formPanel.add(lnameLbl, "align label");
 		formPanel.add(lastNameTxt, "wrap");    
+=======
+		formPanel.add(fNameTxt, "                                                                                                                                                                                                                                       wrap");
+>>>>>>> master
 		formPanel.add(accountTypeLbl, "align label");
 		formPanel.add(accountTypeCombo, "wrap");
 		formPanel.add(payAmountLbl, "align label");
