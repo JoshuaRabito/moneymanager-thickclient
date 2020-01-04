@@ -31,7 +31,6 @@ public enum DeductionsInMemory {
 
 	public void removeAll() {
 		deductionsInMemory = new HashSet<>();
-		
 	}
 
 

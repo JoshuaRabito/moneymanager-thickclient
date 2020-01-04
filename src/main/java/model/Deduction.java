@@ -3,8 +3,6 @@ package model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import swing.api.DeductionType;
-
 public class Deduction implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

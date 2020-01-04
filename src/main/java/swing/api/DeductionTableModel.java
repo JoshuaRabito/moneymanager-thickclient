@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 import model.Deduction;
+import model.DeductionType;
 
 public class DeductionTableModel extends AbstractTableModel {
 

@@ -1,4 +1,4 @@
-package swing.api;
+package model;
 
 public enum AccountType {
 	CHECKING("Checking"),SAVINGS("Savings");
