@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import model.DeductionType;
 import net.miginfocom.swing.MigLayout;
 import swing.api.Closeable;
-import swing.api.DeductionType;
 
 public class AddDeductionView extends JInternalFrame implements Closeable {
 
@@ -77,6 +77,7 @@ public class AddDeductionView extends JInternalFrame implements Closeable {
 		clearBtn = new JButton("Clear");
 		closeBtn = new JButton("Close");
 		buttonPanel.add(saveBtn, "");
+		buttonPanel.add(clearBtn, "");
 		buttonPanel.add(closeBtn, "");
 		return buttonPanel;
 	}

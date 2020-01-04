@@ -1,4 +1,4 @@
-package swing.api;
+package model;
 
 public enum DeductionType {
 	RENT("Rent"), MED("Medical"), FOOD("Food"), UTIL("Utility"),

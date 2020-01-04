@@ -15,9 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import model.AccountType;
 import model.Deduction;
 import net.miginfocom.swing.MigLayout;
-import swing.api.AccountType;
 import swing.api.Closeable;
 
 public class NetIncomeView extends JInternalFrame implements Closeable {
@@ -31,7 +31,8 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 	private JButton saveBtn;
 	private JButton addDeductionsBtn;
 	private JFormattedTextField netAmountText;
-	private JTextField fNameTxt;
+	private JTextField firstNameTxt;
+	private JTextField lastNameTxt;
 
 	public NetIncomeView() {
 		init();
@@ -62,7 +63,7 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 		// build panels for form and buttons
 		JPanel formPanel = buildFormPanel();
 
-		add(formPanel);
+		getContentPane().add(formPanel);
 	}
 
 	private JPanel buildFormPanel() {
@@ -71,7 +72,11 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 		greetinglbl.setFont(greetinglbl.getFont().deriveFont(Font.BOLD | Font.ITALIC, 18));
 
 		JLabel fnameLbl = new JLabel("First name:");
-		fNameTxt = new JTextField();
+		firstNameTxt = new JTextField();
+		firstNameTxt.setColumns(7);
+		JLabel lnameLbl = new JLabel("Last name:");
+		lastNameTxt = new JTextField();
+		lastNameTxt.setColumns(7);
 		JLabel accountTypeLbl = new JLabel("Account Type:");
 		accountTypeCombo = new JComboBox<>();
 		JLabel payAmountLbl = new JLabel("Gross amount:");
@@ -88,7 +93,9 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 
 		formPanel.add(greetinglbl, "span, center, gapbottom 15");
 		formPanel.add(fnameLbl, "align label");
-		formPanel.add(fNameTxt, "                                                                                                                                                                                                                                       wrap");
+		formPanel.add(firstNameTxt, "wrap");
+		formPanel.add(lnameLbl, "align label");
+		formPanel.add(lastNameTxt, "wrap");    
 		formPanel.add(accountTypeLbl, "align label");
 		formPanel.add(accountTypeCombo, "wrap");
 		formPanel.add(payAmountLbl, "align label");
@@ -153,4 +160,13 @@ public class NetIncomeView extends JInternalFrame implements Closeable {
 	public JButton getAddDeductionsBtn() {
 		return addDeductionsBtn;
 	}
+
+	public JTextField getFirstNameTxt() {
+		return firstNameTxt;
+	}
+
+	public JTextField getLastNameTxt() {
+		return lastNameTxt;
+	}
+	
 }

@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import javax.swing.DefaultComboBoxModel;
 
 import model.Deduction;
-import swing.api.DeductionType;
+import model.DeductionType;
 import swing.api.ViewableCombo;
 import swing.validator.AddDeductionViewValidator;
 import swing.view.AddDeductionView;
@@ -34,7 +34,7 @@ public enum AddDeductionViewController implements ViewableCombo<AddDeductionView
 	public void bindListeners() {
 		view.getSaveBtn().addActionListener(e -> saveDeduction());
 		view.getCloseBtn().addActionListener(e -> close());
-		view.getClearBtn().addActionListener(e -> close());
+		view.getClearBtn().addActionListener(e -> clearForm());
 	}
 
 	private void saveDeduction() {
@@ -68,14 +68,13 @@ public enum AddDeductionViewController implements ViewableCombo<AddDeductionView
 	public void clearForm() {
 		view.getTypeCombo().setSelectedItem(null);
 		view.getNameTxt().setText("");
-		view.getNameTxt().setText("");
+		view.getAmountTxt().setText("");
 	}
 
 	@Override
 	public void close() {
 		clearForm();
-		MainFrame.contentPane.getDesktopManager().closeFrame(view);
-		
+		MainFrame.contentPane.getDesktopManager().closeFrame(view);	
 	}
 
 }
