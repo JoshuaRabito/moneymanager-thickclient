@@ -22,7 +22,7 @@ public class LookAndFeelView extends JInternalFrame {
 	}
 
 	private void init() {
-		setTitle("New Deduction");
+		setTitle("Change Look and Feel");
 		setClosable(true);
 		setMaximizable(true);
 		setResizable(true);

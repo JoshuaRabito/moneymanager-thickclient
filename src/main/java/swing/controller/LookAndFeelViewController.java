@@ -4,7 +4,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import model.DeductionType;
 import swing.api.LookAndFeel;
 import swing.api.ViewableCombo;
 import swing.view.LookAndFeelView;
