@@ -1,18 +1,16 @@
 package swing.view;
 
-import java.beans.PropertyChangeEvent;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.WindowConstants;
-import net.miginfocom.swing.MigLayout;
-import swing.api.Closeable;
-import swing.api.DeductionTableModel;
 
-public class DeductionView extends JInternalFrame implements Closeable{
+import net.miginfocom.swing.MigLayout;
+import swing.api.DeductionTableModel;
+import swing.api.MyInternalFrameListener;
+
+public class DeductionView extends JInternalFrame {
 
 	private JButton addBtn;
 	private JButton deleteBtn;
@@ -32,17 +30,9 @@ public class DeductionView extends JInternalFrame implements Closeable{
 		setResizable(true);
 		setSize(520, 500);
 
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		addVetoableChangeListener(this::closePrompt);
+		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
+		addInternalFrameListener(new MyInternalFrameListener<DeductionView>(this));
 		buildForm();
-	}
-	
-	@Override
-	public void closePrompt(PropertyChangeEvent propertyChangeEvent) {
-		if (JInternalFrame.IS_CLOSED_PROPERTY.equals(propertyChangeEvent.getPropertyName())) {
-			JOptionPane.showConfirmDialog(this, "Are you Sure you want to close the window?");
-		}
-		
 	}
 
 	private void buildForm() {

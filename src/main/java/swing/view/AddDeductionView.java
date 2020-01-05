@@ -1,24 +1,20 @@
 package swing.view;
 
-import java.beans.PropertyChangeEvent;
 import java.text.DecimalFormat;
 
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 
 import model.DeductionType;
 import net.miginfocom.swing.MigLayout;
-import swing.api.Closeable;
+import swing.api.MyInternalFrameListener;
 
-public class AddDeductionView extends JInternalFrame implements Closeable {
+public class AddDeductionView extends JInternalFrame {
 
 	private JButton saveBtn;
 	private JButton closeBtn;
@@ -38,8 +34,8 @@ public class AddDeductionView extends JInternalFrame implements Closeable {
 		setResizable(true);
 		setSize(600, 500);
 
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		addVetoableChangeListener(this::closePrompt);
+		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
+		addInternalFrameListener(new MyInternalFrameListener<AddDeductionView>(this));
 		buildForm();
 
 	}
@@ -82,13 +78,6 @@ public class AddDeductionView extends JInternalFrame implements Closeable {
 		return buttonPanel;
 	}
 
-	@Override
-	public void closePrompt(PropertyChangeEvent propertyChangeEvent) {
-		if (JInternalFrame.IS_CLOSED_PROPERTY.equals(propertyChangeEvent.getPropertyName())) {
-			JOptionPane.showConfirmDialog(this, "Are you Sure you want to close the window?");
-		}
-
-	}
 
 	public JButton getSaveBtn() {
 		return saveBtn;
