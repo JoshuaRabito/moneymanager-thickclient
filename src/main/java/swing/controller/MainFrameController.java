@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.swing.SwingUtilities;
 
 import swing.view.DeductionView;
+import swing.view.LookAndFeelView;
 import swing.view.MainFrame;
 import swing.view.NetIncomeView;
 
@@ -44,7 +45,28 @@ public enum MainFrameController {
 			openNetIncomeView();
 		});
 		
-		
+		mainFrame.getLookAndFeelItem().addActionListener(e -> {
+			refreshDesktopPane();
+			openLookAndFeelView();
+		});
+	}
+
+
+
+	private void openLookAndFeelView() {
+		SwingUtilities.invokeLater(() -> {
+
+			LookAndFeelView lookAndFeelView = LookAndFeelViewController.INSTANCE.getView();
+			mainFrame.getContentPane().add(lookAndFeelView);
+			lookAndFeelView.toFront();
+			lookAndFeelView.setVisible(true);
+			try {
+				lookAndFeelView.setSelected(true);
+			} catch (PropertyVetoException e) {
+				e.printStackTrace();
+			}
+		});
+
 	}
 
 

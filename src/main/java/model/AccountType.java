@@ -1,7 +1,8 @@
 package model;
 
 public enum AccountType {
-	CHECKING("Checking"),SAVINGS("Savings");
+	CHECKING("Checking"),
+	SAVINGS("Savings");
 	
 	private String type;
 

@@ -14,6 +14,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem deductionItem;
 	private JMenuItem netIncomeItem;
 	private JMenuItem loadItem;
+	private JMenuItem lookAndFeelItem;
 	public static JDesktopPane contentPane = new JDesktopPane();
 
 	public MainFrame() throws HeadlessException {
@@ -46,7 +47,9 @@ public class MainFrame extends JFrame {
 		
 		JMenu optionsMenu = new JMenu("Options");
 		loadItem = new JMenuItem("Load");
+		lookAndFeelItem = new JMenuItem("Look And Feel");
 		optionsMenu.add(loadItem);
+		optionsMenu.add(lookAndFeelItem);
 		menuBar.add(manageMenu);
 		menuBar.add(optionsMenu);//for import/export
 		return menuBar;
@@ -58,6 +61,10 @@ public class MainFrame extends JFrame {
 
 	public JMenuItem getNetIncomeItem() {
 		return netIncomeItem;
+	}
+
+	public JMenuItem getLookAndFeelItem() {
+		return lookAndFeelItem;
 	}
 
 	public JDesktopPane getContentPane() {
