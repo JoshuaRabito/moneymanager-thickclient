@@ -1,6 +1,7 @@
 package swing.controller;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -39,6 +40,7 @@ INSTANCE;
 		LookAndFeel layout = LookAndFeel.valueOf(view.getLayoutCombo().getModel().getSelectedItem().toString());
 		   try {
 			UIManager.setLookAndFeel(layout.getLookAndFeel());
+			SwingUtilities.updateComponentTreeUI(MainFrame.contentPane);
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
