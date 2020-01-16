@@ -108,6 +108,12 @@ public enum MainFrameController {
 		
 	}
 
+
+	public void updateComponents() {
+		SwingUtilities.updateComponentTreeUI(mainFrame);
+		
+	}
+
 	
 	
 

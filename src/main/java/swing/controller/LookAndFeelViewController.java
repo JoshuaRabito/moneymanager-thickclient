@@ -40,7 +40,7 @@ INSTANCE;
 		LookAndFeel layout = LookAndFeel.valueOf(view.getLayoutCombo().getModel().getSelectedItem().toString());
 		   try {
 			UIManager.setLookAndFeel(layout.getLookAndFeel());
-			SwingUtilities.updateComponentTreeUI(MainFrame.contentPane);
+			MainFrameController.INSTANCE.updateComponents();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
