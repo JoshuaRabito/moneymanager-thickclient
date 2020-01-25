@@ -1,23 +1,13 @@
 package swing.controller;
 
 import java.math.BigDecimal;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.ListModel;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
 import model.AccountType;
 import model.BookBalanceExport;
@@ -88,13 +78,21 @@ public enum NetIncomeViewController implements ViewableCombo<NetIncomeView>{
 
 	private void addDeductions() {
 		Set<Deduction> deductions = DeductionsInMemory.INSTANCE.getDeductions();
-		view.getDeductionList().setListData(deductions.toArray(new Deduction[deductions.size()]));
+		if(isDeductionsEntered(deductions)) {
+			view.getDeductionList().setListData(deductions.toArray(new Deduction[deductions.size()]));
+		}
 		
+	}
+
+	private boolean isDeductionsEntered(Set<Deduction> deductions) {
+		return deductions != null && !deductions.isEmpty();
 	}
 
 	@Override
 	public void clearForm() {
 		view.getGrossAmountTxt().setText("");
+		view.getFirstNameTxt().setText("");
+		view.getLastNameTxt().setText("");
 		view.getAccountTypeCombo().setSelectedItem(null);
 		view.getDeductionList().setListData(new Deduction[0]);
 	}

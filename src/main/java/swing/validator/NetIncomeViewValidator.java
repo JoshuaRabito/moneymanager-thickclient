@@ -4,7 +4,6 @@ import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 
 import model.Deduction;
 import swing.view.NetIncomeView;

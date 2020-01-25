@@ -36,7 +36,7 @@ public class NetIncomeView extends JInternalFrame  {
 	}
 
 	private void init() {
-		setTitle("Money Manager 1.0");
+		setTitle("Money Manager");
 		setVisible(true);
 		setClosable(true);
 		setIconifiable(true);
