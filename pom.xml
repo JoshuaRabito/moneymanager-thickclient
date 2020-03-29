@@ -8,7 +8,12 @@
 	<artifactId>thick-client</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>moneymanager-thick-client</name>
-	
+
+	<properties>
+		<jdk.version>1.8</jdk.version>
+		<junit.version>5.6.1</junit.version>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -59,6 +64,45 @@
 			<version>5.2.2.RELEASE</version>
 		</dependency>
 	</dependencies>
+
+
+	<profiles>
+		<profile>
+			<id>fatjar</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<version>3.1.0</version>
+						<configuration>
+							<!-- get all project dependencies -->
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<!-- MainClass in mainfest make a executable jar -->
+							<archive>
+								<manifest>
+									<mainClass>main.ClientLauncher</mainClass>
+								</manifest>
+							</archive>
+
+						</configuration>
+						<executions>
+							<execution>
+								<id>make-assembly</id>
+								<!-- bind to the package phase -->
+								<phase>package</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 
 

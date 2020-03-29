@@ -1,4 +1,4 @@
-package swing;
+package main;
 
 import static javax.swing.UIManager.setLookAndFeel;
 import javax.swing.SwingUtilities;
