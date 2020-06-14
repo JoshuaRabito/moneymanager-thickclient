@@ -7,7 +7,7 @@ public class Deduction implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private String name;
-	private DeductionType type;
+	private DeductionTypes type;
 	private BigDecimal amount;
 	
 	
@@ -16,7 +16,7 @@ public class Deduction implements Serializable{
 		
 	}
 
-	public Deduction(String name, DeductionType type, BigDecimal amount) {
+	public Deduction(String name, DeductionTypes type, BigDecimal amount) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -31,11 +31,11 @@ public class Deduction implements Serializable{
 		this.name = name;
 	}
 
-	public DeductionType getType() {
+	public DeductionTypes getType() {
 		return type;
 	}
 
-	public void setType(DeductionType type) {
+	public void setType(DeductionTypes type) {
 		this.type = type;
 	}
 

@@ -1,7 +1,6 @@
 package swing.view;
 
 import java.text.DecimalFormat;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -9,8 +8,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import model.DeductionType;
+import model.DeductionTypes;
 import net.miginfocom.swing.MigLayout;
 import swing.api.MyInternalFrameListener;
 
@@ -19,7 +17,7 @@ public class AddDeductionView extends JInternalFrame {
 	private JButton saveBtn;
 	private JButton closeBtn;
 	private JTextField nameTxt;
-	private JComboBox<DeductionType> typeCombo;
+	private JComboBox<DeductionTypes> typeCombo;
 	private JFormattedTextField amountTxt;
 	private JButton clearBtn;
 
@@ -91,7 +89,7 @@ public class AddDeductionView extends JInternalFrame {
 		return nameTxt;
 	}
 
-	public JComboBox<DeductionType> getTypeCombo() {
+	public JComboBox<DeductionTypes> getTypeCombo() {
 		return typeCombo;
 	}
 
