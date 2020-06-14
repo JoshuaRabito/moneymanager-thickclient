@@ -1,80 +1,82 @@
 package swing.controller;
 
 import java.math.BigDecimal;
-
+import java.math.RoundingMode;
 import javax.swing.DefaultComboBoxModel;
-
 import model.Deduction;
-import model.DeductionType;
+import model.DeductionTypes;
 import swing.api.ViewableCombo;
 import swing.validator.AddDeductionViewValidator;
 import swing.view.AddDeductionView;
 import swing.view.MainFrame;
 
-public enum AddDeductionViewController implements ViewableCombo<AddDeductionView>{
-	INSTANCE;
-	
-	private AddDeductionView view;
-	private AddDeductionViewValidator validator;
+public enum AddDeductionViewController implements ViewableCombo<AddDeductionView> {
+  INSTANCE;
 
-	private AddDeductionViewController() {		
-		initView();
-		validator = new AddDeductionViewValidator(view);
-	}
+  private AddDeductionView view;
+  private AddDeductionViewValidator validator;
 
-	private void initView() {
-		view = new AddDeductionView();
-		view.setVisible(true);
-		bindListeners();
-		populateCombos();
-		
-	}
+  private AddDeductionViewController() {
+    initView();
+    validator = new AddDeductionViewValidator(view);
+  }
 
-	@Override
-	public void bindListeners() {
-		view.getSaveBtn().addActionListener(e -> saveDeduction());
-		view.getCloseBtn().addActionListener(e -> close());
-		view.getClearBtn().addActionListener(e -> clearForm());
-	}
+  private void initView() {
+    view = new AddDeductionView();
+    view.setVisible(true);
+    bindListeners();
+    populateCombos();
 
-	private void saveDeduction() {
-		if(validator.validate(view.getAmountTxt().getText(), view.getNameTxt().getText())) {
-			Deduction deduction = buildDeduction();
-			DeductionViewController.INSTANCE.addDeduction(deduction);
-			DeductionsInMemory.INSTANCE.add(deduction);
-		}				
-	}
+  }
 
-	private Deduction buildDeduction() {
-		Deduction deduction = new Deduction();
-		deduction.setAmount(BigDecimal.valueOf(Double.valueOf(view.getAmountTxt().getText())));
-		deduction.setName(view.getNameTxt().getText());
-		deduction.setType(DeductionType.valueOf(view.getTypeCombo().getModel().getSelectedItem().toString()));
-		return deduction;
-	}
+  @Override
+  public void bindListeners() {
+    view.getSaveBtn().addActionListener(e -> saveDeduction());
+    view.getCloseBtn().addActionListener(e -> close());
+    view.getClearBtn().addActionListener(e -> clearForm());
+  }
 
-	@Override
-	public void populateCombos() {
-		view.getTypeCombo().setModel(new DefaultComboBoxModel<>(DeductionType.values()));
-		
-	}
+  private void saveDeduction() {
+    if (validator.validate(view.getAmountTxt().getText(), view.getNameTxt().getText())) {
+      Deduction deduction = buildDeduction();
+      DeductionViewController.INSTANCE.addDeduction(deduction);
+      DeductionsInMemory.INSTANCE.add(deduction);
+    }
+  }
 
-	@Override
-	public AddDeductionView getView() {
-		return view;
-	}
+  private Deduction buildDeduction() {
+    Deduction deduction = new Deduction();
+    BigDecimal amount = BigDecimal.valueOf(Double.valueOf(view.getAmountTxt().getText()));
+    amount = amount.setScale(2, RoundingMode.UNNECESSARY);
+    deduction.setAmount(amount);
+    deduction.setName(view.getNameTxt().getText());
+    deduction.setType(
+        DeductionTypes.valueOf(view.getTypeCombo().getModel().getSelectedItem().toString()));
+    return deduction;
+  }
 
-	@Override
-	public void clearForm() {
-		view.getTypeCombo().setSelectedItem(null);
-		view.getNameTxt().setText("");
-		view.getAmountTxt().setText("");
-	}
+  @Override
+  public void populateCombos() {
+    view.getTypeCombo().setModel(new DefaultComboBoxModel<>(DeductionTypes.values()));
 
-	@Override
-	public void close() {
-		clearForm();
-		MainFrame.contentPane.getDesktopManager().closeFrame(view);	
-	}
+  }
+
+  @Override
+  public AddDeductionView getView() {
+    return view;
+  }
+
+  @Override
+  public void clearForm() {
+    view.getTypeCombo().setSelectedItem(null);
+    view.getNameTxt().setText("");
+    view.getAmountTxt().setText("");
+  }
+
+  @Override
+  public void close() {
+    clearForm();
+    MainFrame.contentPane.getDesktopManager().closeFrame(view);
+  }
 
 }

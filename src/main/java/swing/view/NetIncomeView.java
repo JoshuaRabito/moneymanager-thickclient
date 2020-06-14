@@ -10,6 +10,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import model.AccountType;
@@ -30,6 +31,7 @@ public class NetIncomeView extends JInternalFrame  {
 	private JFormattedTextField netAmountText;
 	private JTextField firstNameTxt;
 	private JTextField lastNameTxt;
+  private JTextField accountNameTxt;
 
 	public NetIncomeView() {
 		init();
@@ -69,6 +71,9 @@ public class NetIncomeView extends JInternalFrame  {
 		JLabel lnameLbl = new JLabel("Last name:");
 		lastNameTxt = new JTextField();
 		lastNameTxt.setColumns(7);
+		JLabel accountNameLbl = new JLabel("Account Name:");
+        accountNameTxt = new JTextField();
+        accountNameTxt.setColumns(15);
 
 		JLabel accountTypeLbl = new JLabel("Account Type:");
 		accountTypeCombo = new JComboBox<>();
@@ -78,6 +83,7 @@ public class NetIncomeView extends JInternalFrame  {
 		grossAmountTxt.setEditable(true);
 		JLabel dedctionLbl = new JLabel("Deductions:");
 		deductionList = new JList<>();
+		JScrollPane jScrollPane = new JScrollPane(deductionList);
 		addDeductionsBtn = new JButton("Add Deductions");
 		JLabel netAmountLbl = new JLabel("Net Amount:");
 		netAmountText = new JFormattedTextField(new DecimalFormat("#####.##"));
@@ -86,16 +92,17 @@ public class NetIncomeView extends JInternalFrame  {
 
 		formPanel.add(greetinglbl, "span, center, gapbottom 15");
 		formPanel.add(fnameLbl, "align label");
-
 		formPanel.add(firstNameTxt, "wrap");
 		formPanel.add(lnameLbl, "align label");
-		formPanel.add(lastNameTxt, "wrap");    
+		formPanel.add(lastNameTxt, "wrap"); 
+		formPanel.add(accountNameLbl, "align label");
+        formPanel.add(accountNameTxt, "wrap");  
 		formPanel.add(accountTypeLbl, "align label");
 		formPanel.add(accountTypeCombo, "wrap");
 		formPanel.add(payAmountLbl, "align label");
 		formPanel.add(grossAmountTxt, "wrap");
 		formPanel.add(dedctionLbl, "align label");
-		formPanel.add(deductionList, "align label");
+		formPanel.add(jScrollPane, "align label");
 		formPanel.add(addDeductionsBtn, "wrap");
 		formPanel.add(netAmountLbl, "align label");
 		formPanel.add(netAmountText, "wrap");
@@ -162,5 +169,15 @@ public class NetIncomeView extends JInternalFrame  {
 	public JTextField getLastNameTxt() {
 		return lastNameTxt;
 	}
+
+  public JTextField getAccountNameTxt() {
+    return accountNameTxt;
+  }
+
+  public void setAccountNameTxt(JTextField accountNameTxt) {
+    this.accountNameTxt = accountNameTxt;
+  }
+	
+	
 	
 }

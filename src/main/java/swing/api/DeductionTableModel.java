@@ -3,17 +3,16 @@ package swing.api;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
 import model.Deduction;
-import model.DeductionType;
+import model.DeductionTypes;
 
 public class DeductionTableModel extends AbstractTableModel {
 
 	private List<Deduction> deductions;
 
 	private DeductionColumns[] columnNames = DeductionColumns.values();
-	private final Class[] columnClass = new Class[] { String.class, DeductionType.class, BigDecimal.class };
+	private final Class[] columnClass = new Class[] { String.class, DeductionTypes.class, BigDecimal.class };
 
 	public DeductionTableModel() {
 		deductions = new ArrayList<>();
@@ -78,7 +77,7 @@ public class DeductionTableModel extends AbstractTableModel {
 			deduction.setName((String) value);
 			break;
 		case 1:
-			deduction.setType((DeductionType) value);
+			deduction.setType((DeductionTypes) value);
 			break;
 		case 2:
 			deduction.setAmount((BigDecimal) value);
