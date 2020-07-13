@@ -1,19 +1,22 @@
 package swing.controller;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
 import swing.api.LookAndFeel;
 import swing.api.ViewableCombo;
 import swing.view.LookAndFeelView;
 import swing.view.MainFrame;
 
-public enum LookAndFeelViewController implements ViewableCombo<LookAndFeelView>{
-INSTANCE;
+@ApplicationScoped
+public class LookAndFeelViewController implements ViewableCombo<LookAndFeelView>{
 	
 	private LookAndFeelView view;
+	
+	@Inject
+	private MainFrameController mainFrameController;
 
 	private LookAndFeelViewController() {		
 		initView();
@@ -40,7 +43,7 @@ INSTANCE;
 		LookAndFeel layout = LookAndFeel.valueOf(view.getLayoutCombo().getModel().getSelectedItem().toString());
 		   try {
 			UIManager.setLookAndFeel(layout.getLookAndFeel());
-			MainFrameController.INSTANCE.updateComponents();
+			mainFrameController.updateComponents();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
 			e.printStackTrace();

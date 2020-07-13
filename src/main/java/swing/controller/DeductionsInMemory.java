@@ -2,11 +2,11 @@ package swing.controller;
 
 import java.util.HashSet;
 import java.util.Set;
-
+import javax.enterprise.context.ApplicationScoped;
 import model.Deduction;
 
-public enum DeductionsInMemory {
-	INSTANCE;	
+@ApplicationScoped
+public class DeductionsInMemory {
 	
 	private Set<Deduction> deductionsInMemory;
 

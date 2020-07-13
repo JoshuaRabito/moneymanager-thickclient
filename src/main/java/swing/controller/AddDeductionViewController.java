@@ -2,6 +2,8 @@ package swing.controller;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.swing.DefaultComboBoxModel;
 import model.Deduction;
 import model.DeductionTypes;
@@ -10,11 +12,17 @@ import swing.validator.AddDeductionViewValidator;
 import swing.view.AddDeductionView;
 import swing.view.MainFrame;
 
-public enum AddDeductionViewController implements ViewableCombo<AddDeductionView> {
-  INSTANCE;
+@ApplicationScoped
+public class AddDeductionViewController implements ViewableCombo<AddDeductionView> {
 
   private AddDeductionView view;
   private AddDeductionViewValidator validator;
+  
+  @Inject
+  private DeductionViewController deductionViewController;
+  
+  @Inject 
+  private DeductionsInMemory deductionsInMemory;
 
   private AddDeductionViewController() {
     initView();
@@ -39,8 +47,8 @@ public enum AddDeductionViewController implements ViewableCombo<AddDeductionView
   private void saveDeduction() {
     if (validator.validate(view.getAmountTxt().getText(), view.getNameTxt().getText())) {
       Deduction deduction = buildDeduction();
-      DeductionViewController.INSTANCE.addDeduction(deduction);
-      DeductionsInMemory.INSTANCE.add(deduction);
+      deductionViewController.addDeduction(deduction);
+      deductionsInMemory.add(deduction);
     }
   }
 

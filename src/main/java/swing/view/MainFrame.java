@@ -66,6 +66,10 @@ public class MainFrame extends JFrame {
 	public JMenuItem getLookAndFeelItem() {
 		return lookAndFeelItem;
 	}
+	
+    public JMenuItem getLoadItem() {
+      return loadItem;
+    }
 
 	public JDesktopPane getContentPane() {
 		return contentPane;
