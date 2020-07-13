@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.Set;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import org.springframework.http.HttpStatus;
@@ -16,11 +18,14 @@ import swing.validator.NetIncomeViewValidator;
 import swing.view.MainFrame;
 import swing.view.NetIncomeView;
 
-public enum NetIncomeViewController implements ViewableCombo<NetIncomeView> {
-  INSTANCE;
+@ApplicationScoped
+public class NetIncomeViewController implements ViewableCombo<NetIncomeView> {
 
   private NetIncomeView view;
   private NetIncomeViewValidator validator;
+  
+  @Inject 
+  private DeductionsInMemory deductionsInMemory;
 
   private NetIncomeViewController() {
     initView();
@@ -64,7 +69,7 @@ public enum NetIncomeViewController implements ViewableCombo<NetIncomeView> {
 
   private BookBalanceExport buildBookBalanceExport() {
     return BookBalanceExport.ExportBuilder.newInstance().with(exportBuilder -> {
-      Set<Deduction> deductions = DeductionsInMemory.INSTANCE.getDeductions();
+      Set<Deduction> deductions = deductionsInMemory.getDeductions();
       JComboBox<AccountType> accountTypeCombo = view.getAccountTypeCombo();
 
       exportBuilder
@@ -86,7 +91,7 @@ public enum NetIncomeViewController implements ViewableCombo<NetIncomeView> {
   }
 
   private void addDeductions() {
-    Set<Deduction> deductions = DeductionsInMemory.INSTANCE.getDeductions();
+    Set<Deduction> deductions = deductionsInMemory.getDeductions();
     if (isDeductionsEntered(deductions)) {
       view.getDeductionList().setListData(deductions.toArray(new Deduction[deductions.size()]));
     }
@@ -113,7 +118,7 @@ public enum NetIncomeViewController implements ViewableCombo<NetIncomeView> {
     boolean isValid =
         validator.validate(view.getGrossAmountTxt().getText(), view.getDeductionList().getModel());
     if (isValid) {
-      Set<Deduction> deductions = DeductionsInMemory.INSTANCE.getDeductions();
+      Set<Deduction> deductions = deductionsInMemory.getDeductions();
       BigDecimal grossAmount =
           BigDecimal.valueOf(Double.valueOf(view.getGrossAmountTxt().getText()));
       for (Deduction deduction : deductions) {

@@ -1,7 +1,8 @@
 package swing.controller;
 
 import java.beans.PropertyVetoException;
-
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.swing.SwingUtilities;
 
 import model.Deduction;
@@ -11,10 +12,16 @@ import swing.view.AddDeductionView;
 import swing.view.DeductionView;
 import swing.view.MainFrame;
 
-public enum DeductionViewController implements ViewActions<DeductionView>{
-	INSTANCE;
+@ApplicationScoped
+public class DeductionViewController implements ViewActions<DeductionView>{
 
 	private DeductionView view;
+	
+	@Inject
+	private AddDeductionViewController addDeductionViewController;
+	
+	@Inject 
+	private DeductionsInMemory deductionsInMemory;
 
 	private DeductionViewController() {
 		initView();
@@ -33,7 +40,7 @@ public enum DeductionViewController implements ViewActions<DeductionView>{
 		view.getAddBtn().addActionListener(e -> {
 			SwingUtilities.invokeLater(() -> {
 				
-				AddDeductionView addView = AddDeductionViewController.INSTANCE.getView();
+				AddDeductionView addView = addDeductionViewController.getView();
 				MainFrame.contentPane.add(addView);
 				addView.toFront();
 				addView.setVisible(true);
@@ -49,7 +56,7 @@ public enum DeductionViewController implements ViewActions<DeductionView>{
 		view.getDeleteBtn().addActionListener(e -> {
 			DeductionTableModel model 
 			= (DeductionTableModel) view.getDeductionsTable().getModel();
-			DeductionsInMemory.INSTANCE.remove(model.getDeduction(view.getDeductionsTable().getSelectedRow()));
+			deductionsInMemory.remove(model.getDeduction(view.getDeductionsTable().getSelectedRow()));
 			model.removeDeduction(view.getDeductionsTable().getSelectedRow());		
 		});
 		
@@ -68,7 +75,7 @@ public enum DeductionViewController implements ViewActions<DeductionView>{
 	public void clearForm() {
 		DeductionTableModel model = (DeductionTableModel)view.getDeductionsTable().getModel();
 		model.removeAllDeductions();
-		DeductionsInMemory.INSTANCE.removeAll();
+		deductionsInMemory.removeAll();
 	}
 
 	public void addDeduction(Deduction deduction) {

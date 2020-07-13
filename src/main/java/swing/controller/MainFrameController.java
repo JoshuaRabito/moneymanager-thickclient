@@ -3,19 +3,28 @@ package swing.controller;
 import java.beans.PropertyVetoException;
 import java.util.HashMap;
 import java.util.Map;
-
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.swing.SwingUtilities;
-
 import swing.view.DeductionView;
 import swing.view.LookAndFeelView;
 import swing.view.MainFrame;
 import swing.view.NetIncomeView;
 
-public enum MainFrameController {
-	INSTANCE;
+@ApplicationScoped
+public class MainFrameController {
 
 	private MainFrame mainFrame;
 	private Map components;
+	
+	@Inject
+	private LookAndFeelViewController lookAndFeelViewController;
+	
+	@Inject 
+	private DeductionViewController deductionViewController;
+	
+	@Inject 
+	private NetIncomeViewController netIncomeViewController;
 
 	private MainFrameController() {
 		components = new HashMap<>();
@@ -49,6 +58,11 @@ public enum MainFrameController {
 			refreshDesktopPane();
 			openLookAndFeelView();
 		});
+		
+		mainFrame.getLoadItem().addActionListener(e -> {
+		  refreshDesktopPane();
+          openLoadView();
+		});
 	}
 
 
@@ -56,7 +70,7 @@ public enum MainFrameController {
 	private void openLookAndFeelView() {
 		SwingUtilities.invokeLater(() -> {
 
-			LookAndFeelView lookAndFeelView = LookAndFeelViewController.INSTANCE.getView();
+			LookAndFeelView lookAndFeelView = lookAndFeelViewController.getView();
 			mainFrame.getContentPane().add(lookAndFeelView);
 			lookAndFeelView.toFront();
 			lookAndFeelView.setVisible(true);
@@ -79,7 +93,7 @@ public enum MainFrameController {
 	private void openDeductionView() {
 		SwingUtilities.invokeLater(() ->{
 			
-			DeductionView deductionView = DeductionViewController.INSTANCE.getView();
+			DeductionView deductionView = deductionViewController.getView();
 			mainFrame.getContentPane().add(deductionView);
 			deductionView.toFront();
 			deductionView.setVisible(true);
@@ -95,7 +109,7 @@ public enum MainFrameController {
 	
 	private void openNetIncomeView() {
 		SwingUtilities.invokeLater(() ->{
-			NetIncomeView netView = NetIncomeViewController.INSTANCE.getView();
+			NetIncomeView netView = netIncomeViewController.getView();
 			mainFrame.getContentPane().add(netView);
 			netView.toFront();
 			netView.setVisible(true);
@@ -107,6 +121,21 @@ public enum MainFrameController {
 		});
 		
 	}
+	
+	private void openLoadView() {
+//      SwingUtilities.invokeLater(() ->{
+////          NetIncomeView netView = LoadFinanceController.INSTANCE.getView();
+//          mainFrame.getContentPane().add(netView);
+//          netView.toFront();
+//          netView.setVisible(true);
+//          try {
+//              netView.setSelected(true);
+//          } catch (PropertyVetoException e) {
+//              e.printStackTrace();
+//          }
+//      });
+      
+  }
 
 
 	public void updateComponents() {
