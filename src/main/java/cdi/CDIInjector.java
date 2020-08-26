@@ -34,6 +34,9 @@ public class CDIInjector {
   @Inject
   private NetIncomeViewController netIncomeViewController;
   
+  @Inject
+  private LoadFinanceController financeController;
+  
   
 
 

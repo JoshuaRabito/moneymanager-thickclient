@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import model.Deduction;
+import model.DeductionDTO;
 import model.DeductionTypes;
 
 public class DeductionTableModel extends AbstractTableModel {
 
-	private List<Deduction> deductions;
+	private List<DeductionDTO> deductions;
 
 	private DeductionColumns[] columnNames = DeductionColumns.values();
 	private final Class[] columnClass = new Class[] { String.class, DeductionTypes.class, BigDecimal.class };
@@ -18,7 +18,7 @@ public class DeductionTableModel extends AbstractTableModel {
 		deductions = new ArrayList<>();
 	}
 
-	public DeductionTableModel(List<Deduction> deductions) {
+	public DeductionTableModel(List<DeductionDTO> deductions) {
 		this.deductions = deductions;
 	}
 
@@ -54,7 +54,7 @@ public class DeductionTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int row, int column) {
-		Deduction deduction = getDeduction(row);
+		DeductionDTO deduction = getDeduction(row);
 
 		switch (column) {
 		case 0:
@@ -70,7 +70,7 @@ public class DeductionTableModel extends AbstractTableModel {
 
 	@Override
 	public void setValueAt(Object value, int row, int column) {
-		Deduction deduction = getDeduction(row);
+		DeductionDTO deduction = getDeduction(row);
 
 		switch (column) {
 		case 0:
@@ -87,15 +87,15 @@ public class DeductionTableModel extends AbstractTableModel {
 		fireTableCellUpdated(row, column);
 	}
 
-	public Deduction getDeduction(int row) {
+	public DeductionDTO getDeduction(int row) {
 		return deductions.get(row);
 	}
 
-	public void addDeduction(Deduction deduction) {
+	public void addDeduction(DeductionDTO deduction) {
 		insertDeduction(getRowCount(), deduction);
 	}
 
-	public void insertDeduction(int row, Deduction deduction) {
+	public void insertDeduction(int row, DeductionDTO deduction) {
 		deductions.add(row, deduction);
 		fireTableRowsInserted(row, row);
 	}

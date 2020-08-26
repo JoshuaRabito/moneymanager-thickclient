@@ -8,7 +8,7 @@ public class BookBalanceExport {
 
   private String firstName;
   private String lastName;
-  private List<Deduction> deductions;
+  private List<DeductionDTO> deductions;
   private BigDecimal netIncome;
   private BigDecimal grossIncome;
   private AccountType accountType;
@@ -24,7 +24,7 @@ public class BookBalanceExport {
   public static class ExportBuilder {
     private String fName;
     private String lName;
-    private List<Deduction> deductList;
+    private List<DeductionDTO> deductList;
     private BigDecimal net;
     private BigDecimal gross;
     private AccountType type;
@@ -64,7 +64,7 @@ public class BookBalanceExport {
       this.lName = lName;
     }
 
-    public void setDeductList(List<Deduction> deductList) {
+    public void setDeductList(List<DeductionDTO> deductList) {
       this.deductList = deductList;
     }
 
@@ -107,12 +107,12 @@ public class BookBalanceExport {
   }
 
 
-  public List<Deduction> getDeductions() {
+  public List<DeductionDTO> getDeductions() {
     return deductions;
   }
 
 
-  public void setDeductions(List<Deduction> deductions) {
+  public void setDeductions(List<DeductionDTO> deductions) {
     this.deductions = deductions;
   }
 

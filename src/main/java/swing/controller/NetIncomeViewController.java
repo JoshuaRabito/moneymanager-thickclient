@@ -11,7 +11,7 @@ import javax.swing.JComboBox;
 import org.springframework.http.HttpStatus;
 import model.AccountType;
 import model.BookBalanceExport;
-import model.Deduction;
+import model.DeductionDTO;
 import swing.api.BookBalanceRestClient;
 import swing.api.ViewableCombo;
 import swing.validator.NetIncomeViewValidator;
@@ -69,11 +69,11 @@ public class NetIncomeViewController implements ViewableCombo<NetIncomeView> {
 
   private BookBalanceExport buildBookBalanceExport() {
     return BookBalanceExport.ExportBuilder.newInstance().with(exportBuilder -> {
-      Set<Deduction> deductions = deductionsInMemory.getDeductions();
+      Set<DeductionDTO> deductions = deductionsInMemory.getDeductions();
       JComboBox<AccountType> accountTypeCombo = view.getAccountTypeCombo();
 
       exportBuilder
-          .setDeductList(Arrays.asList(deductions.toArray(new Deduction[deductions.size()])));
+          .setDeductList(Arrays.asList(deductions.toArray(new DeductionDTO[deductions.size()])));
       exportBuilder.setType(accountTypeCombo.getItemAt(accountTypeCombo.getSelectedIndex()));
       exportBuilder.setfName(view.getFirstNameTxt().getText());
       exportBuilder.setlName(view.getLastNameTxt().getText());
@@ -91,14 +91,14 @@ public class NetIncomeViewController implements ViewableCombo<NetIncomeView> {
   }
 
   private void addDeductions() {
-    Set<Deduction> deductions = deductionsInMemory.getDeductions();
+    Set<DeductionDTO> deductions = deductionsInMemory.getDeductions();
     if (isDeductionsEntered(deductions)) {
-      view.getDeductionList().setListData(deductions.toArray(new Deduction[deductions.size()]));
+      view.getDeductionList().setListData(deductions.toArray(new DeductionDTO[deductions.size()]));
     }
 
   }
 
-  private boolean isDeductionsEntered(Set<Deduction> deductions) {
+  private boolean isDeductionsEntered(Set<DeductionDTO> deductions) {
     return deductions != null && !deductions.isEmpty();
   }
 
@@ -111,17 +111,17 @@ public class NetIncomeViewController implements ViewableCombo<NetIncomeView> {
     view.getAccountNameTxt().setText("");
 
     view.getAccountTypeCombo().setSelectedItem(null);
-    view.getDeductionList().setListData(new Deduction[0]);
+    view.getDeductionList().setListData(new DeductionDTO[0]);
   }
 
   private void calculateTotal() {
     boolean isValid =
         validator.validate(view.getGrossAmountTxt().getText(), view.getDeductionList().getModel());
     if (isValid) {
-      Set<Deduction> deductions = deductionsInMemory.getDeductions();
+      Set<DeductionDTO> deductions = deductionsInMemory.getDeductions();
       BigDecimal grossAmount =
           BigDecimal.valueOf(Double.valueOf(view.getGrossAmountTxt().getText()));
-      for (Deduction deduction : deductions) {
+      for (DeductionDTO deduction : deductions) {
         grossAmount = grossAmount.subtract(deduction.getAmount());
       }
 

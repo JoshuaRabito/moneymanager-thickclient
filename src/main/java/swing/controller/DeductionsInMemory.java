@@ -3,28 +3,28 @@ package swing.controller;
 import java.util.HashSet;
 import java.util.Set;
 import javax.enterprise.context.ApplicationScoped;
-import model.Deduction;
+import model.DeductionDTO;
 
 @ApplicationScoped
 public class DeductionsInMemory {
 	
-	private Set<Deduction> deductionsInMemory;
+	private Set<DeductionDTO> deductionsInMemory;
 
 	private DeductionsInMemory() {
 		 deductionsInMemory = new HashSet<>();
 	}
 	
-	public void add(Deduction deduction) {
+	public void add(DeductionDTO deduction) {
 		deductionsInMemory.add(deduction);
 	}
 	
-	public void remove(Deduction deduction) {
+	public void remove(DeductionDTO deduction) {
 		deductionsInMemory.remove(deduction);
 	}
 	
-	public Set<Deduction> getDeductions() {
+	public Set<DeductionDTO> getDeductions() {
 		//return defensive copy
-		Set<Deduction> copiedDeductions = new HashSet<>();
+		Set<DeductionDTO> copiedDeductions = new HashSet<>();
 		copiedDeductions.addAll(deductionsInMemory);
 		return copiedDeductions;
 	}
