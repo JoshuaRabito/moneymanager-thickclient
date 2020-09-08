@@ -1,12 +1,11 @@
 package swing.controller;
 
 import java.beans.PropertyVetoException;
-import java.util.HashMap;
-import java.util.Map;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.swing.SwingUtilities;
 import swing.view.DeductionView;
+import swing.view.LoadFinanceView;
 import swing.view.LookAndFeelView;
 import swing.view.MainFrame;
 import swing.view.NetIncomeView;
@@ -15,7 +14,6 @@ import swing.view.NetIncomeView;
 public class MainFrameController {
 
 	private MainFrame mainFrame;
-	private Map components;
 	
 	@Inject
 	private LookAndFeelViewController lookAndFeelViewController;
@@ -25,9 +23,11 @@ public class MainFrameController {
 	
 	@Inject 
 	private NetIncomeViewController netIncomeViewController;
+	
+	@Inject
+	private LoadFinanceController loadFinanceController;
 
 	private MainFrameController() {
-		components = new HashMap<>();
 	}
 
 	
@@ -123,17 +123,17 @@ public class MainFrameController {
 	}
 	
 	private void openLoadView() {
-//      SwingUtilities.invokeLater(() ->{
-////          NetIncomeView netView = LoadFinanceController.INSTANCE.getView();
-//          mainFrame.getContentPane().add(netView);
-//          netView.toFront();
-//          netView.setVisible(true);
-//          try {
-//              netView.setSelected(true);
-//          } catch (PropertyVetoException e) {
-//              e.printStackTrace();
-//          }
-//      });
+      SwingUtilities.invokeLater(() ->{
+          LoadFinanceView loadView = loadFinanceController.getView();
+          mainFrame.getContentPane().add(loadView);
+          loadView.toFront();
+          loadView.setVisible(true);
+          try {
+            loadView.setSelected(true);
+          } catch (PropertyVetoException e) {
+              e.printStackTrace();
+          }
+      });
       
   }
 

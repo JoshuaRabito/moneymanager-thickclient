@@ -5,7 +5,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.swing.SwingUtilities;
 
-import model.Deduction;
+import model.DeductionDTO;
 import swing.api.DeductionTableModel;
 import swing.api.ViewActions;
 import swing.view.AddDeductionView;
@@ -78,7 +78,7 @@ public class DeductionViewController implements ViewActions<DeductionView>{
 		deductionsInMemory.removeAll();
 	}
 
-	public void addDeduction(Deduction deduction) {
+	public void addDeduction(DeductionDTO deduction) {
 		DeductionTableModel model = (DeductionTableModel) view.getDeductionsTable().getModel();
 		model.addDeduction(deduction);
 		

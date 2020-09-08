@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.swing.DefaultComboBoxModel;
-import model.Deduction;
+import model.DeductionDTO;
 import model.DeductionTypes;
 import swing.api.ViewableCombo;
 import swing.validator.AddDeductionViewValidator;
@@ -46,14 +46,14 @@ public class AddDeductionViewController implements ViewableCombo<AddDeductionVie
 
   private void saveDeduction() {
     if (validator.validate(view.getAmountTxt().getText(), view.getNameTxt().getText())) {
-      Deduction deduction = buildDeduction();
+      DeductionDTO deduction = buildDeduction();
       deductionViewController.addDeduction(deduction);
       deductionsInMemory.add(deduction);
     }
   }
 
-  private Deduction buildDeduction() {
-    Deduction deduction = new Deduction();
+  private DeductionDTO buildDeduction() {
+    DeductionDTO deduction = new DeductionDTO();
     BigDecimal amount = BigDecimal.valueOf(Double.valueOf(view.getAmountTxt().getText()));
     amount = amount.setScale(2, RoundingMode.UNNECESSARY);
     deduction.setAmount(amount);
@@ -63,7 +63,7 @@ public class AddDeductionViewController implements ViewableCombo<AddDeductionVie
     return deduction;
   }
 
-  @Override
+  @Override  
   public void populateCombos() {
     view.getTypeCombo().setModel(new DefaultComboBoxModel<>(DeductionTypes.values()));
 

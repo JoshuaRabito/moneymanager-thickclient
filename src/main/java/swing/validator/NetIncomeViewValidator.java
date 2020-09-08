@@ -5,7 +5,7 @@ import javax.swing.ListModel;
 
 import org.apache.commons.lang3.StringUtils;
 
-import model.Deduction;
+import model.DeductionDTO;
 import swing.view.NetIncomeView;
 
 /**
@@ -26,7 +26,7 @@ public class NetIncomeViewValidator {
 		this.view = view;
 	}
 
-	public boolean validate(String grossAmt, ListModel<Deduction> listModel) {
+	public boolean validate(String grossAmt, ListModel<DeductionDTO> listModel) {
 	
 		return validateGrossEntered(grossAmt)
 				&& validateDeductionsEntered(listModel);
@@ -42,7 +42,7 @@ public class NetIncomeViewValidator {
 		return isValid;
 	}
 	
-	private boolean validateDeductionsEntered(ListModel<Deduction> listModel) {
+	private boolean validateDeductionsEntered(ListModel<DeductionDTO> listModel) {
 		boolean isValid = true;
 		if(listModel.getSize() == 0) {
 			isValid = false;
