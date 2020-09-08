@@ -5,9 +5,12 @@ import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import org.jdesktop.swingx.JXDatePicker;
 import net.miginfocom.swing.MigLayout;
+import swing.api.DeductionTableModel;
 import swing.api.MyInternalFrameListener;
 
 public class LoadFinanceView extends JInternalFrame {
@@ -19,6 +22,7 @@ public class LoadFinanceView extends JInternalFrame {
   private JButton closeBtn;
   private JButton clearBtn;
   private JButton loadBtn;
+  private JTable deductionTable;
 
   public LoadFinanceView() {
     init();
@@ -70,7 +74,10 @@ public class LoadFinanceView extends JInternalFrame {
     formPanel.add(dateCreatedLbl, "align label");
     formPanel.add(datePicker, "wrap");
    
-
+    deductionTable = new JTable(new DeductionTableModel());
+    JScrollPane accountsPane = new JScrollPane(deductionTable);
+    
+    formPanel.add(accountsPane, "span");
     JPanel buttonPanel = buildButtonPanel();
     formPanel.add(buttonPanel, "dock south");
     return formPanel;
@@ -143,6 +150,12 @@ public class LoadFinanceView extends JInternalFrame {
   public void setLoadBtn(JButton loadBtn) {
     this.loadBtn = loadBtn;
   }
+
+  public JTable getDeductionTable() {
+    return deductionTable;
+  }
+  
+  
   
   
 

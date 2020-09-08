@@ -11,7 +11,9 @@ import javax.swing.JOptionPane;
 
 public class MainFrame extends JFrame {
 
-	private JMenuItem deductionItem;
+	private static final String GREETING = "Joshua, good to see you again. \nRemember that you work hard and deserve a drink."
+        +"\nNow, let us talk money!";
+  private JMenuItem deductionItem;
 	private JMenuItem netIncomeItem;
 	private JMenuItem loadItem;
 	private JMenuItem lookAndFeelItem;
@@ -33,7 +35,7 @@ public class MainFrame extends JFrame {
 		setJMenuBar(menuBar);
 		setSize(800, 800);
 		setLocationRelativeTo(null);
-		JOptionPane.showMessageDialog(this, "Let's talk money!");
+		JOptionPane.showMessageDialog(this, GREETING);
 	}
 
 	private JMenuBar buildMenu() {

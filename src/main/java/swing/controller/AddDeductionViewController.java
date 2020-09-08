@@ -63,7 +63,7 @@ public class AddDeductionViewController implements ViewableCombo<AddDeductionVie
     return deduction;
   }
 
-  @Override
+  @Override  
   public void populateCombos() {
     view.getTypeCombo().setModel(new DefaultComboBoxModel<>(DeductionTypes.values()));
 

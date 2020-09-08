@@ -1,9 +1,11 @@
 package swing.controller;
 
+import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import model.AccountDTO;
-import model.FinanceSearchDTO;
+import model.DeductionDTO;
 import swing.api.BookBalanceRestClient;
+import swing.api.DeductionTableModel;
 import swing.api.ViewActions;
 import swing.validator.LoadFinanceValidator;
 import swing.view.LoadFinanceView;
@@ -39,25 +41,20 @@ public class LoadFinanceController implements ViewActions<LoadFinanceView> {
         validator.validate(view.getAccountNameTxt().getText(), view.getDatePicker().getDate(),
             view.getFirstNameTxt().getText(), view.getLastNameTxt().getText());
     if (isValid) {
-      // build finanace search param
-      FinanceSearchDTO searchDto = buildSearchDTO();
       // send data to rest end point for storage
-      sendSearchDtoToEndPoint(searchDto);
+      sendSearchDataToEndPoint();
     }
   }
 
-  private void sendSearchDtoToEndPoint(FinanceSearchDTO searchDto) {
-    AccountDTO account = BookBalanceRestClient.getInstance().loadFinances(searchDto);
-    System.out.println(account);
+  private void sendSearchDataToEndPoint() {
+    AccountDTO account = BookBalanceRestClient.getInstance()
+        .loadFinances(view.getAccountNameTxt().getText(), view.getDatePicker().getDate());
+    loadDataInGrid(account.getDeductions());
   }
 
-  private FinanceSearchDTO buildSearchDTO() {
-    FinanceSearchDTO dto = new FinanceSearchDTO();
-    dto.setAccountName(view.getAccountNameTxt().getText());
-    dto.setDateCreated(view.getDatePicker().getDate());
-    dto.setFirstName(view.getFirstNameTxt().getText());
-    dto.setLastName(view.getLastNameTxt().getText());
-    return dto;
+  private void loadDataInGrid(List<DeductionDTO> deductions) {
+    DeductionTableModel model = (DeductionTableModel) view.getDeductionTable().getModel();
+    model.addDeductions(deductions);
   }
 
   @Override
@@ -71,7 +68,13 @@ public class LoadFinanceController implements ViewActions<LoadFinanceView> {
     view.getLastNameTxt().setText("");
     view.getAccountNameTxt().setText("");
     view.getDatePicker().setDate(null);
+    removeDeductionsFromTable();
 
+  }
+
+  private void removeDeductionsFromTable() {
+    DeductionTableModel model = (DeductionTableModel)view.getDeductionTable().getModel();
+    model.removeAllDeductions();
   }
 
   @Override

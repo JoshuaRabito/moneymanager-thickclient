@@ -2,6 +2,7 @@ package swing.api;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,7 +12,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 import model.AccountDTO;
 import model.BookBalanceExport;
-import model.FinanceSearchDTO;
 
 /**
  * {@code BookBalanceRestClient} Class
@@ -26,7 +26,7 @@ import model.FinanceSearchDTO;
  */
 public class BookBalanceRestClient {
   private static final String IMPORT_ENDPOINT = "http://localhost:8080/import";
-  private static final String EXPORT_ENDPOINT = "http://localhost:8080/export";
+  private static final String EXPORT_ENDPOINT = "http://localhost:8080/export?accountName={accountName}&dateCreated={dateCreated}";
 
   private RestTemplate restTemplate;
 
@@ -52,8 +52,14 @@ public class BookBalanceRestClient {
 
   }
 
-  public AccountDTO loadFinances(FinanceSearchDTO searchDto) {
-    return restTemplate.getForObject(EXPORT_ENDPOINT,AccountDTO.class, searchDto);   
+
+  public AccountDTO loadFinances(String accountName, Date dateCreated) {
+    AccountDTO responseEntity =
+       restTemplate.getForObject(
+        EXPORT_ENDPOINT, AccountDTO.class,
+        accountName, dateCreated);
+    System.out.println(responseEntity);
+    return responseEntity;
   }
 
 }

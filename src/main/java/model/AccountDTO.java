@@ -1,13 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class AccountDTO {
+public class AccountDTO implements Serializable {
 
-  private Long accountId;
   private String accountType;
   private String accountName;
   private List<DeductionDTO> deductions;
@@ -15,14 +15,6 @@ public class AccountDTO {
   private BigDecimal netAmount;
   private Date dateCreated;
   private Date dateUpdated;
-
-  public Long getAccountId() {
-    return accountId;
-  }
-
-  public void setAccountId(Long accountId) {
-    this.accountId = accountId;
-  }
 
   public String getAccountType() {
     return accountType;
@@ -82,8 +74,8 @@ public class AccountDTO {
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountId, accountName, accountType, dateCreated, dateUpdated, deductions,
-        grossAmount, netAmount);
+    return Objects.hash(accountName, accountType, dateCreated, dateUpdated, deductions, grossAmount,
+        netAmount);
   }
 
   @Override
@@ -95,8 +87,7 @@ public class AccountDTO {
     if (getClass() != obj.getClass())
       return false;
     AccountDTO other = (AccountDTO) obj;
-    return Objects.equals(accountId, other.accountId)
-        && Objects.equals(accountName, other.accountName)
+    return Objects.equals(accountName, other.accountName)
         && Objects.equals(accountType, other.accountType)
         && Objects.equals(dateCreated, other.dateCreated)
         && Objects.equals(dateUpdated, other.dateUpdated)
@@ -108,9 +99,7 @@ public class AccountDTO {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append("AccountDTO [accountId=");
-    builder.append(accountId);
-    builder.append(", accountType=");
+    builder.append("AccountDTO [accountType=");
     builder.append(accountType);
     builder.append(", accountName=");
     builder.append(accountName);
@@ -127,6 +116,7 @@ public class AccountDTO {
     builder.append("]");
     return builder.toString();
   }
+
 
 
 
