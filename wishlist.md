@@ -1,6 +1,5 @@
-# Wishlist
+# Wish list
 * Externalize error messages.
-* Inject loggers instead of using static variables.
-* Externalize endpoints.
+* Use Event Model to update in memory cache
 
 

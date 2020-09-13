@@ -2,6 +2,7 @@ package model;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class BookBalanceExport {
@@ -30,14 +31,6 @@ public class BookBalanceExport {
     private AccountType type;
     private String accountName;
 
-    private ExportBuilder() {
-      // Enforce use of factory method
-    }
-
-    public static ExportBuilder newInstance() {
-      return new ExportBuilder();
-    }
-
 
     public ExportBuilder with(Consumer<ExportBuilder> buildFuntion) {
       buildFuntion.accept(this);
@@ -56,32 +49,44 @@ public class BookBalanceExport {
       return balanceExport;
     }
 
-    public void setfName(String fName) {
+    public ExportBuilder setfName(String fName) {
       this.fName = fName;
+      return this;
     }
 
-    public void setlName(String lName) {
+    public ExportBuilder setlName(String lName) {
       this.lName = lName;
+      return this;
+
     }
 
-    public void setDeductList(List<DeductionDTO> deductList) {
+    public ExportBuilder setDeductList(List<DeductionDTO> deductList) {
       this.deductList = deductList;
+      return this;
+
     }
 
-    public void setNet(BigDecimal net) {
+    public ExportBuilder setNet(BigDecimal net) {
       this.net = net;
+      return this;
+
     }
 
-    public void setGross(BigDecimal gross) {
+    public ExportBuilder setGross(BigDecimal gross) {
       this.gross = gross;
+      return this;
+
     }
 
-    public void setType(AccountType type) {
+    public ExportBuilder setType(AccountType type) {
       this.type = type;
+      return this;
+
     }
 
-    public void setAccountName(String accountName) {
+    public ExportBuilder setAccountName(String accountName) {
       this.accountName = accountName;
+      return this;
     }
 
   }
@@ -92,7 +97,7 @@ public class BookBalanceExport {
   }
 
 
-  public void setFirstName(String firstName) {
+  private void setFirstName(String firstName) {
     this.firstName = firstName;
   }
 
@@ -102,7 +107,7 @@ public class BookBalanceExport {
   }
 
 
-  public void setLastName(String lastName) {
+  private void setLastName(String lastName) {
     this.lastName = lastName;
   }
 
@@ -112,7 +117,7 @@ public class BookBalanceExport {
   }
 
 
-  public void setDeductions(List<DeductionDTO> deductions) {
+  private void setDeductions(List<DeductionDTO> deductions) {
     this.deductions = deductions;
   }
 
@@ -122,7 +127,7 @@ public class BookBalanceExport {
   }
 
 
-  public void setNetIncome(BigDecimal netIncome) {
+  private void setNetIncome(BigDecimal netIncome) {
     this.netIncome = netIncome;
   }
 
@@ -132,7 +137,7 @@ public class BookBalanceExport {
   }
 
 
-  public void setGrossIncome(BigDecimal grossIncome) {
+  private void setGrossIncome(BigDecimal grossIncome) {
     this.grossIncome = grossIncome;
   }
 
@@ -142,7 +147,7 @@ public class BookBalanceExport {
   }
 
 
-  public void setAccountType(AccountType accountType) {
+  private void setAccountType(AccountType accountType) {
     this.accountType = accountType;
   }
 
@@ -150,23 +155,15 @@ public class BookBalanceExport {
     return accountName;
   }
   
-  public void setAccountName(String accountName) {
+  private void setAccountName(String accountName) {
     this.accountName = accountName;
   }
 
 
   @Override
   public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((accountName == null) ? 0 : accountName.hashCode());
-    result = prime * result + ((accountType == null) ? 0 : accountType.hashCode());
-    result = prime * result + ((deductions == null) ? 0 : deductions.hashCode());
-    result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-    result = prime * result + ((grossIncome == null) ? 0 : grossIncome.hashCode());
-    result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-    result = prime * result + ((netIncome == null) ? 0 : netIncome.hashCode());
-    return result;
+    return Objects.hash(accountName, accountType, deductions, firstName, grossIncome, lastName,
+        netIncome);
   }
 
 
@@ -179,41 +176,35 @@ public class BookBalanceExport {
     if (getClass() != obj.getClass())
       return false;
     BookBalanceExport other = (BookBalanceExport) obj;
-    if (accountName == null) {
-      if (other.accountName != null)
-        return false;
-    } else if (!accountName.equals(other.accountName))
-      return false;
-    if (accountType != other.accountType)
-      return false;
-    if (deductions == null) {
-      if (other.deductions != null)
-        return false;
-    } else if (!deductions.equals(other.deductions))
-      return false;
-    if (firstName == null) {
-      if (other.firstName != null)
-        return false;
-    } else if (!firstName.equals(other.firstName))
-      return false;
-    if (grossIncome == null) {
-      if (other.grossIncome != null)
-        return false;
-    } else if (!grossIncome.equals(other.grossIncome))
-      return false;
-    if (lastName == null) {
-      if (other.lastName != null)
-        return false;
-    } else if (!lastName.equals(other.lastName))
-      return false;
-    if (netIncome == null) {
-      if (other.netIncome != null)
-        return false;
-    } else if (!netIncome.equals(other.netIncome))
-      return false;
-    return true;
+    return Objects.equals(accountName, other.accountName) && accountType == other.accountType
+        && Objects.equals(deductions, other.deductions)
+        && Objects.equals(firstName, other.firstName)
+        && Objects.equals(grossIncome, other.grossIncome)
+        && Objects.equals(lastName, other.lastName) && Objects.equals(netIncome, other.netIncome);
   }
 
 
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("BookBalanceExport [firstName=");
+    builder.append(firstName);
+    builder.append(", lastName=");
+    builder.append(lastName);
+    builder.append(", deductions=");
+    builder.append(deductions);
+    builder.append(", netIncome=");
+    builder.append(netIncome);
+    builder.append(", grossIncome=");
+    builder.append(grossIncome);
+    builder.append(", accountType=");
+    builder.append(accountType);
+    builder.append(", accountName=");
+    builder.append(accountName);
+    builder.append("]");
+    return builder.toString();
+  }
+  
+  
 
 }

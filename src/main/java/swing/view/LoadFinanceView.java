@@ -154,9 +154,4 @@ public class LoadFinanceView extends JInternalFrame {
   public JTable getDeductionTable() {
     return deductionTable;
   }
-  
-  
-  
-  
-
 }
