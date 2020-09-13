@@ -30,10 +30,8 @@ jobs:
         # Token to checkout the repository.
         repo_token: 
         # Access key on Code Inspector
-        code_inspector_access_key: 
-        # Secret key on Code Inspector
-        code_inspector_secret_key: 
-        # Minimum grade. Valid options are EXCELLENT, GOOD, NEUTRAL, WARNING, CRITICAL. Leave blank to ignore.
+        code_inspector_access_key: ${{ secrets.CODE_INSPECTOR_ACCESS_KEY }}
+        code_inspector_secret_key: ${{ secrets.CODE_INSPECTOR_ACCESS_KEY }}
         min_quality_grade: # default is 
         # Minimum quality score from 0 (worst) to 100 (best)
         min_quality_score: # default is 0
