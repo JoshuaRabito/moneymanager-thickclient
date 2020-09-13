@@ -8,11 +8,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import swing.api.ResourcesBundleReader;
 
 public class MainFrame extends JFrame {
 
-	private static final String GREETING = "Joshua, good to see you again. \nRemember that you work hard and deserve a drink."
-        +"\nNow, let us talk money!";
+	private static final String GREETING = ResourcesBundleReader.getString("greeting");
   private JMenuItem deductionItem;
 	private JMenuItem netIncomeItem;
 	private JMenuItem loadItem;
@@ -43,17 +43,17 @@ public class MainFrame extends JFrame {
 		JMenu manageMenu = new JMenu("Manage");
 		deductionItem = new JMenuItem("Deductions");
 		netIncomeItem = new JMenuItem("Net Income");
+	    loadItem = new JMenuItem("Load");
 		
 		manageMenu.add(deductionItem);
 		manageMenu.add(netIncomeItem);
+		manageMenu.add(loadItem);
 		
 		JMenu optionsMenu = new JMenu("Options");
-		loadItem = new JMenuItem("Load");
 		lookAndFeelItem = new JMenuItem("Look And Feel");
-		optionsMenu.add(loadItem);
 		optionsMenu.add(lookAndFeelItem);
 		menuBar.add(manageMenu);
-		menuBar.add(optionsMenu);//for import/export
+		menuBar.add(optionsMenu);
 		return menuBar;
 	}
 

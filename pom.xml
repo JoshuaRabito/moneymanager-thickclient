@@ -19,6 +19,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
 				<configuration>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
@@ -42,11 +43,6 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.8.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jtattoo</groupId>
-			<artifactId>JTattoo</artifactId>
-			<version>1.6.7</version>
 		</dependency>
 		<dependency>
 			<groupId>com.seaglasslookandfeel</groupId>
@@ -104,6 +100,7 @@
 			<artifactId>swingx</artifactId>
 			<version>1.6.1</version>
 		</dependency>
+
 	</dependencies>
 
 
@@ -141,6 +138,7 @@
 						</executions>
 					</plugin>
 				</plugins>
+
 			</build>
 		</profile>
 	</profiles>

@@ -100,7 +100,4 @@ public class AddDeductionView extends JInternalFrame {
 	public JButton getClearBtn() {
 		return clearBtn;
 	}
-	
-	
-
 }

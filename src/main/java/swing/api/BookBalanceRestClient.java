@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import javax.enterprise.context.ApplicationScoped;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +25,14 @@ import model.BookBalanceExport;
  * @author Rabito, Joshua
  *
  */
+@ApplicationScoped
 public class BookBalanceRestClient {
-  private static final String IMPORT_ENDPOINT = "http://localhost:8080/import";
-  private static final String EXPORT_ENDPOINT = "http://localhost:8080/export?accountName={accountName}&dateCreated={dateCreated}";
+  private static final String IMPORT_ENDPOINT = ResourcesBundleReader.getString("endpoint.account.import"); //$NON-NLS-1$
+  private static final String EXPORT_ENDPOINT = ResourcesBundleReader.getString("endpoint.account.export"); //$NON-NLS-1$
 
   private RestTemplate restTemplate;
 
-  private BookBalanceRestClient() {
+  public BookBalanceRestClient() {
     // enforce use of factory method
     restTemplate = new RestTemplate();
     List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
@@ -40,13 +42,9 @@ public class BookBalanceRestClient {
     restTemplate.setMessageConverters(messageConverters);
   }
 
-  public static BookBalanceRestClient getInstance() {
-    return new BookBalanceRestClient();
-  }
-
   public HttpStatus postBookBalance(BookBalanceExport export) {
-    ResponseEntity<HttpStatus> responseEntityStr =
-        restTemplate.postForEntity(IMPORT_ENDPOINT, export, HttpStatus.class);
+    ResponseEntity<BookBalanceExport> responseEntityStr =
+        restTemplate.postForEntity(IMPORT_ENDPOINT, export, BookBalanceExport.class);
 
     return responseEntityStr.getStatusCode();
 
@@ -54,12 +52,12 @@ public class BookBalanceRestClient {
 
 
   public AccountDTO loadFinances(String accountName, Date dateCreated) {
-    AccountDTO responseEntity =
-       restTemplate.getForObject(
+    ResponseEntity<AccountDTO> responseEntity =
+       restTemplate.getForEntity(
         EXPORT_ENDPOINT, AccountDTO.class,
         accountName, dateCreated);
-    System.out.println(responseEntity);
-    return responseEntity;
+    System.out.println(responseEntity.getBody());
+    return responseEntity.getBody();
   }
 
 }

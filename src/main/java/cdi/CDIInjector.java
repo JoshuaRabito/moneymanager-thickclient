@@ -2,6 +2,7 @@ package cdi;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import swing.api.BookBalanceRestClient;
 import swing.controller.AddDeductionViewController;
 import swing.controller.DeductionViewController;
 import swing.controller.DeductionsInMemory;
@@ -37,7 +38,8 @@ public class CDIInjector {
   @Inject
   private LoadFinanceController financeController;
   
-  
+  @Inject
+  private BookBalanceRestClient restClient;
 
 
   public void init() {

@@ -2,6 +2,7 @@ package swing.controller;
 
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import model.AccountDTO;
 import model.DeductionDTO;
 import swing.api.BookBalanceRestClient;
@@ -16,6 +17,9 @@ public class LoadFinanceController implements ViewActions<LoadFinanceView> {
 
   private LoadFinanceView view;
   private LoadFinanceValidator validator;
+
+  @Inject
+  private BookBalanceRestClient restClient;
 
 
 
@@ -47,8 +51,8 @@ public class LoadFinanceController implements ViewActions<LoadFinanceView> {
   }
 
   private void sendSearchDataToEndPoint() {
-    AccountDTO account = BookBalanceRestClient.getInstance()
-        .loadFinances(view.getAccountNameTxt().getText(), view.getDatePicker().getDate());
+    AccountDTO account =
+        restClient.loadFinances(view.getAccountNameTxt().getText(), view.getDatePicker().getDate());
     loadDataInGrid(account.getDeductions());
   }
 
@@ -73,7 +77,7 @@ public class LoadFinanceController implements ViewActions<LoadFinanceView> {
   }
 
   private void removeDeductionsFromTable() {
-    DeductionTableModel model = (DeductionTableModel)view.getDeductionTable().getModel();
+    DeductionTableModel model = (DeductionTableModel) view.getDeductionTable().getModel();
     model.removeAllDeductions();
   }
 

@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.swing.DefaultComboBoxModel;
@@ -26,6 +28,12 @@ public class NetIncomeViewController implements ViewableCombo<NetIncomeView> {
   
   @Inject 
   private DeductionsInMemory deductionsInMemory;
+  
+  @Inject
+  private Logger logger;
+  
+  @Inject
+  private BookBalanceRestClient restClient;
 
   private NetIncomeViewController() {
     initView();
@@ -62,32 +70,27 @@ public class NetIncomeViewController implements ViewableCombo<NetIncomeView> {
   }
 
   private void sendExportToRestEndPoint(BookBalanceExport export) {
-    HttpStatus status = BookBalanceRestClient.getInstance().postBookBalance(export);
-    System.out.println(status);
+    HttpStatus status = restClient.postBookBalance(export);
+    logger.log(Level.INFO, "Status of posting finances is {0}", status);
 
   }
 
   private BookBalanceExport buildBookBalanceExport() {
-    return BookBalanceExport.ExportBuilder.newInstance().with(exportBuilder -> {
-      Set<DeductionDTO> deductions = deductionsInMemory.getDeductions();
-      JComboBox<AccountType> accountTypeCombo = view.getAccountTypeCombo();
+    Set<DeductionDTO> deductions = deductionsInMemory.getDeductions();
+    BigDecimal net = BigDecimal.valueOf(Double.valueOf(view.getNetAmountText().getText()));
+    net = net.setScale(2, RoundingMode.UNNECESSARY);
+    BigDecimal gross = BigDecimal.valueOf(Double.valueOf(view.getGrossAmountTxt().getText()));
+    gross = gross.setScale(2, RoundingMode.UNNECESSARY);
 
-      exportBuilder
-          .setDeductList(Arrays.asList(deductions.toArray(new DeductionDTO[deductions.size()])));
-      exportBuilder.setType(accountTypeCombo.getItemAt(accountTypeCombo.getSelectedIndex()));
-      exportBuilder.setfName(view.getFirstNameTxt().getText());
-      exportBuilder.setlName(view.getLastNameTxt().getText());
-      exportBuilder.setAccountName(view.getAccountNameTxt().getText());
+    JComboBox<AccountType> accountTypeCombo = view.getAccountTypeCombo();
 
-      BigDecimal gross = BigDecimal.valueOf(Double.valueOf(view.getGrossAmountTxt().getText()));
-      gross = gross.setScale(2, RoundingMode.UNNECESSARY);
-      exportBuilder.setGross(gross);
-
-
-      BigDecimal net = BigDecimal.valueOf(Double.valueOf(view.getNetAmountText().getText()));
-      net = net.setScale(2, RoundingMode.UNNECESSARY);
-      exportBuilder.setNet(net);
-    }).build();
+    return new BookBalanceExport.ExportBuilder()
+        .setDeductList(Arrays.asList(deductions.toArray(new DeductionDTO[deductions.size()])))
+        .setType(accountTypeCombo.getItemAt(accountTypeCombo.getSelectedIndex()))
+        .setfName(view.getFirstNameTxt().getText()).setlName(view.getLastNameTxt().getText())
+        .setAccountName(view.getAccountNameTxt().getText())
+        .setGross(gross)
+        .setNet(net).build();
   }
 
   private void addDeductions() {
@@ -109,7 +112,6 @@ public class NetIncomeViewController implements ViewableCombo<NetIncomeView> {
     view.getFirstNameTxt().setText("");
     view.getLastNameTxt().setText("");
     view.getAccountNameTxt().setText("");
-
     view.getAccountTypeCombo().setSelectedItem(null);
     view.getDeductionList().setListData(new DeductionDTO[0]);
   }
