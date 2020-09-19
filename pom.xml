@@ -12,6 +12,9 @@
 	<properties>
 		<jdk.version>1.8</jdk.version>
 		<junit.version>5.6.1</junit.version>
+		<sonar.projectKey>JoshuaRabito_moneymanager-thickclient</sonar.projectKey>
+		<sonar.organization>joshuarabito</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
 	<build>
