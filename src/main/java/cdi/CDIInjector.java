@@ -1,5 +1,7 @@
 package cdi;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import swing.api.BookBalanceRestClient;
@@ -34,16 +36,16 @@ public class CDIInjector {
   
   @Inject
   private NetIncomeViewController netIncomeViewController;
-  
-  @Inject
-  private LoadFinanceController financeController;
-  
+    
   @Inject
   private BookBalanceRestClient restClient;
+  
+  @Inject 
+  private Logger logger;
 
 
   public void init() {
-    // TODO Auto-generated method stub
+    logger.log(Level.INFO, "Setting CDI Injections");
     
   }
 
