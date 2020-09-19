@@ -11,6 +11,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import model.AccountType;
 import model.DeductionDTO;
 import net.miginfocom.swing.MigLayout;
@@ -18,6 +19,8 @@ import swing.api.MyInternalFrameListener;
 
 public class NetIncomeView extends JInternalFrame {
 
+  private static final String WRAP = "wrap";
+  private static final String ALIGN_LABEL = "align label";
   private JComboBox<AccountType> accountTypeCombo;
   private JFormattedTextField grossAmountTxt;
   private JList<DeductionDTO> deductionList;
@@ -43,7 +46,7 @@ public class NetIncomeView extends JInternalFrame {
     setMaximizable(true);
     setResizable(true);
     setSize(500, 500);
-    setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
+    setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     addInternalFrameListener(new MyInternalFrameListener<NetIncomeView>(this));
 
     buildForm();
@@ -89,21 +92,21 @@ public class NetIncomeView extends JInternalFrame {
     netAmountText.setEnabled(false);
 
     formPanel.add(greetinglbl, "span, center, gapbottom 15");
-    formPanel.add(fnameLbl, "align label");
-    formPanel.add(firstNameTxt, "wrap");
-    formPanel.add(lnameLbl, "align label");
-    formPanel.add(lastNameTxt, "wrap");
-    formPanel.add(accountNameLbl, "align label");
-    formPanel.add(accountNameTxt, "wrap");
-    formPanel.add(accountTypeLbl, "align label");
-    formPanel.add(accountTypeCombo, "wrap");
-    formPanel.add(payAmountLbl, "align label");
-    formPanel.add(grossAmountTxt, "wrap");
-    formPanel.add(dedctionLbl, "align label");
-    formPanel.add(jScrollPane, "align label");
-    formPanel.add(addDeductionsBtn, "wrap");
-    formPanel.add(netAmountLbl, "align label");
-    formPanel.add(netAmountText, "wrap");
+    formPanel.add(fnameLbl, ALIGN_LABEL);
+    formPanel.add(firstNameTxt, WRAP);
+    formPanel.add(lnameLbl, ALIGN_LABEL);
+    formPanel.add(lastNameTxt, WRAP);
+    formPanel.add(accountNameLbl, ALIGN_LABEL);
+    formPanel.add(accountNameTxt, WRAP);
+    formPanel.add(accountTypeLbl, ALIGN_LABEL);
+    formPanel.add(accountTypeCombo, WRAP);
+    formPanel.add(payAmountLbl, ALIGN_LABEL);
+    formPanel.add(grossAmountTxt, WRAP);
+    formPanel.add(dedctionLbl, ALIGN_LABEL);
+    formPanel.add(jScrollPane, ALIGN_LABEL);
+    formPanel.add(addDeductionsBtn, WRAP);
+    formPanel.add(netAmountLbl, ALIGN_LABEL);
+    formPanel.add(netAmountText, WRAP);
 
     JPanel buttonPanel = buildButtonPanel();
     formPanel.add(buttonPanel, "dock south");

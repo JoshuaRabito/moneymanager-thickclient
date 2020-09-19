@@ -7,14 +7,14 @@ public enum LookAndFeel {
 	LUNA("com.jtattoo.plaf.luna.LunaLookAndFeel"),
 	SEAGLASS("com.seaglasslookandfeel.SeaGlassLookAndFeel");
 
-	private String lookAndFeel;
+	private String classPath;
 
 	LookAndFeel(String lookAndFeel) {
-		this.lookAndFeel = lookAndFeel;
+		this.classPath = lookAndFeel;
 	}
 
 	public String getLookAndFeel() {
-		return lookAndFeel;
+		return classPath;
 	}
 
 }

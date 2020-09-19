@@ -8,29 +8,29 @@ import model.DeductionDTO;
 @ApplicationScoped
 public class DeductionsInMemory {
 	
-	private Set<DeductionDTO> deductionsInMemory;
+	private Set<DeductionDTO> deductions;
 
 	private DeductionsInMemory() {
-		 deductionsInMemory = new HashSet<>();
+		 deductions = new HashSet<>();
 	}
 	
 	public void add(DeductionDTO deduction) {
-		deductionsInMemory.add(deduction);
+		deductions.add(deduction);
 	}
 	
 	public void remove(DeductionDTO deduction) {
-		deductionsInMemory.remove(deduction);
+		deductions.remove(deduction);
 	}
 	
 	public Set<DeductionDTO> getDeductions() {
 		//return defensive copy
 		Set<DeductionDTO> copiedDeductions = new HashSet<>();
-		copiedDeductions.addAll(deductionsInMemory);
+		copiedDeductions.addAll(deductions);
 		return copiedDeductions;
 	}
 
 	public void removeAll() {
-		deductionsInMemory = new HashSet<>();
+		deductions = new HashSet<>();
 	}
 
 

@@ -8,13 +8,15 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import model.DeductionTypes;
 import net.miginfocom.swing.MigLayout;
 import swing.api.MyInternalFrameListener;
 
 public class AddDeductionView extends JInternalFrame {
 
-	private JButton saveBtn;
+	private static final String ALIGN_LABEL = "align label";
+  private JButton saveBtn;
 	private JButton closeBtn;
 	private JTextField nameTxt;
 	private JComboBox<DeductionTypes> typeCombo;
@@ -32,7 +34,7 @@ public class AddDeductionView extends JInternalFrame {
 		setResizable(true);
 		setSize(600, 500);
 
-		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		addInternalFrameListener(new MyInternalFrameListener<AddDeductionView>(this));
 		buildForm();
 
@@ -54,11 +56,11 @@ public class AddDeductionView extends JInternalFrame {
 		JPanel buttonPanel = buildButtonPanel();
 		
 		formPanel.add(greetingLabel, "span, center, gapbottom 15");
-		formPanel.add(nameLabel, "align label");
+		formPanel.add(nameLabel, ALIGN_LABEL);
 		formPanel.add(nameTxt, "wrap");
-		formPanel.add(typeLabel, "align label");
+		formPanel.add(typeLabel, ALIGN_LABEL);
 		formPanel.add(typeCombo, "wrap");
-		formPanel.add(amountLabel, "align label");
+		formPanel.add(amountLabel, ALIGN_LABEL);
 		formPanel.add(amountTxt);
 		formPanel.add(buttonPanel, "dock south");
 		add(formPanel);
