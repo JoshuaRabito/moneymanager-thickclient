@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import org.jdesktop.swingx.JXDatePicker;
 import net.miginfocom.swing.MigLayout;
 import swing.api.DeductionTableModel;
@@ -15,6 +16,7 @@ import swing.api.MyInternalFrameListener;
 
 public class LoadFinanceView extends JInternalFrame {
 
+  private static final String ALIGN_LABEL = "align label";
   private JTextField firstNameTxt;
   private JTextField lastNameTxt;
   private JTextField accountNameTxt;
@@ -35,7 +37,7 @@ public class LoadFinanceView extends JInternalFrame {
     setResizable(true);
     setSize(520, 500);
 
-    setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
+    setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     addInternalFrameListener(new MyInternalFrameListener<LoadFinanceView>(this));
     buildForm();
   }
@@ -65,13 +67,13 @@ public class LoadFinanceView extends JInternalFrame {
     datePicker = new JXDatePicker();
 
     formPanel.add(greetinglbl, "span, center, gapbottom 15");
-    formPanel.add(fnameLbl, "align label");
+    formPanel.add(fnameLbl, ALIGN_LABEL);
     formPanel.add(firstNameTxt, "wrap");
-    formPanel.add(lnameLbl, "align label");
+    formPanel.add(lnameLbl, ALIGN_LABEL);
     formPanel.add(lastNameTxt, "wrap");
-    formPanel.add(accountNameLbl, "align label");
+    formPanel.add(accountNameLbl, ALIGN_LABEL);
     formPanel.add(accountNameTxt, "wrap");
-    formPanel.add(dateCreatedLbl, "align label");
+    formPanel.add(dateCreatedLbl, ALIGN_LABEL);
     formPanel.add(datePicker, "wrap");
    
     deductionTable = new JTable(new DeductionTableModel());

@@ -1,6 +1,5 @@
 package swing.view;
 
-import java.awt.HeadlessException;
 import javax.swing.DefaultDesktopManager;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -19,7 +18,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem lookAndFeelItem;
 	public static JDesktopPane contentPane = new JDesktopPane();
 
-	public MainFrame() throws HeadlessException {
+	public MainFrame() {
 		this.setTitle("Money Manager 1.0");
 		this.pack();
 		this.setVisible(true);

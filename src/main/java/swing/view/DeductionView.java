@@ -5,7 +5,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
+import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 import swing.api.DeductionTableModel;
 import swing.api.MyInternalFrameListener;
@@ -30,7 +30,7 @@ public class DeductionView extends JInternalFrame {
 		setResizable(true);
 		setSize(520, 500);
 
-		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		addInternalFrameListener(new MyInternalFrameListener<DeductionView>(this));
 		buildForm();
 	}

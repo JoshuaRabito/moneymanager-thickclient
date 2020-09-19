@@ -5,7 +5,7 @@ import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+import javax.swing.WindowConstants;
 import net.miginfocom.swing.MigLayout;
 import swing.api.LookAndFeel;
 import swing.api.MyInternalFrameListener;
@@ -28,7 +28,7 @@ public class LookAndFeelView extends JInternalFrame {
 		setResizable(true);
 		setSize(600, 500);
 
-		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		addInternalFrameListener(new MyInternalFrameListener<LookAndFeelView>(this));
 		buildForm();
 

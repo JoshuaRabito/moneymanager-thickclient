@@ -45,12 +45,8 @@ public class DeductionTableModel extends AbstractTableModel {
 
   @Override
   public boolean isCellEditable(int row, int column) {
-    switch (column) {
-      case 2:
-        return true; // only the amount is editable
-      default:
-        return false;
-    }
+    return column == 2;
+
   }
 
   @Override
