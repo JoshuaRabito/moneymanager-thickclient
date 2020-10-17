@@ -9,8 +9,7 @@ import java.util.Objects;
 public class AccountDTO implements Serializable {
   
   private Long accountId;
-  private String firstName;
-  private String lastName;
+  private UserDto user;
   private String accountType;
   private String accountName;
   private List<DeductionDTO> deductions;
@@ -29,20 +28,12 @@ public class AccountDTO implements Serializable {
     this.accountId = accountId;
   }
 
-  public String getFirstName() {
-    return firstName;
+  public UserDto getUser() {
+    return user;
   }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
+  public void setUser(UserDto user) {
+    this.user = user;
   }
 
   public String getAccountType() {
@@ -104,7 +95,7 @@ public class AccountDTO implements Serializable {
   @Override
   public int hashCode() {
     return Objects.hash(accountId, accountName, accountType, dateCreated, dateUpdated, deductions,
-        firstName, grossAmount, lastName, netAmount);
+        grossAmount, netAmount, user);
   }
 
   @Override
@@ -122,23 +113,20 @@ public class AccountDTO implements Serializable {
         && Objects.equals(dateCreated, other.dateCreated)
         && Objects.equals(dateUpdated, other.dateUpdated)
         && Objects.equals(deductions, other.deductions)
-        && Objects.equals(firstName, other.firstName)
         && Objects.equals(grossAmount, other.grossAmount)
-        && Objects.equals(lastName, other.lastName) && Objects.equals(netAmount, other.netAmount);
+        && Objects.equals(netAmount, other.netAmount) && Objects.equals(user, other.user);
   }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append("AccountDTO [accountId=").append(accountId).append(", firstName=")
-        .append(firstName).append(", lastName=").append(lastName).append(", accountType=")
-        .append(accountType).append(", accountName=").append(accountName).append(", deductions=")
-        .append(deductions).append(", grossAmount=").append(grossAmount).append(", netAmount=")
-        .append(netAmount).append(", dateCreated=").append(dateCreated).append(", dateUpdated=")
-        .append(dateUpdated).append("]");
+    builder.append("AccountDTO [accountId=").append(accountId).append(", user=").append(user)
+        .append(", accountType=").append(accountType).append(", accountName=").append(accountName)
+        .append(", deductions=").append(deductions).append(", grossAmount=").append(grossAmount)
+        .append(", netAmount=").append(netAmount).append(", dateCreated=").append(dateCreated)
+        .append(", dateUpdated=").append(dateUpdated).append("]");
     return builder.toString();
   }
 
- 
 
 }

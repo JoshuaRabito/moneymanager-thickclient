@@ -5,16 +5,16 @@ import java.util.List;
 import com.joshuacodes.moneymanagerclient.model.AccountDTO;
 import com.joshuacodes.moneymanagerclient.model.AccountType;
 import com.joshuacodes.moneymanagerclient.model.DeductionDTO;
+import com.joshuacodes.moneymanagerclient.model.UserDto;
 
 public final class AccountDTOBuilder {
 
   private List<DeductionDTO> deductions;
   private AccountType type;
-  private String firstName;
-  private String lastName;
   private String accountName;
   private BigDecimal gross;
   private BigDecimal net;
+  private UserDto user;
 
   private AccountDTOBuilder() {
    //Use factory method
@@ -38,16 +38,6 @@ public final class AccountDTOBuilder {
     return this;
   }
 
-  public AccountDTOBuilder setfirstName(final String name) {
-    this.firstName = name;
-    return this;
-  }
-
-  public AccountDTOBuilder setlastName(final String name) {
-    this.lastName = name;
-    return this;
-  }
-
   public AccountDTOBuilder setAccountName(final String name) {
     this.accountName = name;
     return this;
@@ -68,17 +58,18 @@ public final class AccountDTOBuilder {
     accountDTO.setAccountName(accountName);
     accountDTO.setAccountType(type.getType());
     accountDTO.setDeductions(deductions);
-    accountDTO.setFirstName(firstName);
     accountDTO.setGrossAmount(gross);
-    accountDTO.setLastName(lastName);
     accountDTO.setNetAmount(net);
+    accountDTO.setUser(user);
     return accountDTO; 
   }
 
+  public AccountDTOBuilder setUser(String firstName, String lastName) {
+    user = new UserDto();
+    user.setFirstName(firstName);
+    user.setLastName(lastName);
+    return this;
+  }
 
-
-
-  
-  
 
 }

@@ -80,6 +80,7 @@ public class DeductionViewController implements ViewActions<DeductionView> {
 
   @Override
   public DeductionView getView() {
+    deductionsInMemory.getDeductions().stream().forEach(deduction -> addDeduction(deduction));
     return view;
   }
 

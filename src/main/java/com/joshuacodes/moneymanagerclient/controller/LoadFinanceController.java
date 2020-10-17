@@ -1,8 +1,10 @@
 package com.joshuacodes.moneymanagerclient.controller;
 
+import java.beans.PropertyVetoException;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.swing.SwingUtilities;
 import com.joshuacodes.moneymanagerclient.api.BookBalanceRestClient;
 import com.joshuacodes.moneymanagerclient.api.DeductionTableModel;
 import com.joshuacodes.moneymanagerclient.api.ViewActions;
@@ -10,7 +12,9 @@ import com.joshuacodes.moneymanagerclient.model.AccountDTO;
 import com.joshuacodes.moneymanagerclient.model.DeductionDTO;
 import com.joshuacodes.moneymanagerclient.model.DeductionsInMemory;
 import com.joshuacodes.moneymanagerclient.validator.LoadFinanceValidator;
+import com.joshuacodes.moneymanagerclient.view.AddDeductionView;
 import com.joshuacodes.moneymanagerclient.view.LoadFinanceView;
+import com.joshuacodes.moneymanagerclient.view.MainFrame;
 
 @ApplicationScoped
 public class LoadFinanceController implements ViewActions<LoadFinanceView> {
@@ -20,9 +24,12 @@ public class LoadFinanceController implements ViewActions<LoadFinanceView> {
 
   @Inject
   private BookBalanceRestClient restClient;
-  
+
   @Inject
   private DeductionsInMemory deductionsInMemory;
+
+  @Inject
+  private AddDeductionViewController addDeductionViewController;
 
 
 
@@ -42,45 +49,70 @@ public class LoadFinanceController implements ViewActions<LoadFinanceView> {
     view.getClearBtn().addActionListener(e -> clearForm());
     view.getLoadBtn().addActionListener(e -> loadFinances());
     view.getDeductionTable().getSelectionModel().addListSelectionListener(e -> enableViewBtn());
+    view.getViewBtn().addActionListener(e -> showAddDeductionView());
+  }
+
+  private void showAddDeductionView() {
+    SwingUtilities.invokeLater(() -> {
+
+      AddDeductionView addView = addDeductionViewController.getView();
+      addDeductionViewController
+          .loadDeductionInView(((DeductionTableModel) view.getDeductionTable().getModel())
+              .getDeduction(view.getDeductionTable().getSelectedRow()));
+      MainFrame.contentPane.add(addView);
+      addView.toFront();
+      addView.setVisible(true);
+      try {
+        addView.setSelected(true);
+      } catch (PropertyVetoException ex) {
+        ex.printStackTrace();
+      }
+
+    });
+
   }
 
   private void loadFinances() {
-    boolean isValid =
-        validator.validate(view.getAccountNameTxt().getText(), view.getCreatedDatePicker().getDate(),
-            view.getFirstNameTxt().getText(), view.getLastNameTxt().getText());
+    boolean isValid = validator.validate(view.getAccountNameTxt().getText(),
+        view.getCreatedDatePicker().getDate(), view.getFirstNameTxt().getText(),
+        view.getLastNameTxt().getText());
     if (isValid) {
       // send data to rest end point for storage
       sendSearchDataToEndPoint();
     }
   }
-  
+
   private void enableViewBtn() {
     view.getViewBtn().setEnabled(isRowSelected());
   }
-  
+
 
   private boolean isRowSelected() {
     return view.getDeductionTable().getSelectedRow() != -1;
   }
 
   private void sendSearchDataToEndPoint() {
-    AccountDTO account =
-        restClient.loadFinances(view.getAccountNameTxt().getText(), view.getCreatedDatePicker().getDate());
+    AccountDTO account = restClient.loadFinances(view.getAccountNameTxt().getText(),
+        view.getCreatedDatePicker().getDate());
     loadDataInGrid(account.getDeductions());
     loadDataInForm(account);
+    loadDeductionsInMemory(account);
+  }
+
+  private void loadDeductionsInMemory(AccountDTO account) {
     deductionsInMemory.removeAll();
-    deductionsInMemory.getDeductions().addAll(account.getDeductions());
+    account.getDeductions().stream().forEach(deduction -> deductionsInMemory.add(deduction));
   }
 
   private void loadDataInGrid(List<DeductionDTO> deductions) {
     DeductionTableModel model = (DeductionTableModel) view.getDeductionTable().getModel();
     model.addDeductions(deductions);
   }
-  
+
   private void loadDataInForm(AccountDTO account) {
     view.getAccountNameTxt().setText(account.getAccountName());
     view.getCreatedDatePicker().setDate(account.getDateCreated());
-    view.getNetAmountTxt().setText(String.valueOf(account.getNetAmount())); 
+    view.getNetAmountTxt().setText(String.valueOf(account.getNetAmount()));
   }
 
   @Override
