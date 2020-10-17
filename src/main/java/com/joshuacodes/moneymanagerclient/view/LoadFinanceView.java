@@ -20,11 +20,13 @@ public class LoadFinanceView extends JInternalFrame {
   private JTextField firstNameTxt;
   private JTextField lastNameTxt;
   private JTextField accountNameTxt;
-  private JXDatePicker datePicker;
+  private JXDatePicker createdDatePicker;
   private JButton closeBtn;
   private JButton clearBtn;
   private JButton loadBtn;
   private JTable deductionTable;
+  private JTextField netAmountTxt;
+  private JButton viewBtn;
 
   public LoadFinanceView() {
     init();
@@ -64,7 +66,13 @@ public class LoadFinanceView extends JInternalFrame {
     accountNameTxt.setColumns(15);
 
     JLabel dateCreatedLbl = new JLabel("Date Created:");
-    datePicker = new JXDatePicker();
+    createdDatePicker = new JXDatePicker();
+    
+    JLabel netAmoutLbl = new JLabel("Net:");
+    netAmountTxt = new JTextField();
+    netAmountTxt.setColumns(15);
+    netAmountTxt.setEditable(false);
+
 
     formPanel.add(greetinglbl, "span, center, gapbottom 15");
     formPanel.add(fnameLbl, ALIGN_LABEL);
@@ -74,7 +82,9 @@ public class LoadFinanceView extends JInternalFrame {
     formPanel.add(accountNameLbl, ALIGN_LABEL);
     formPanel.add(accountNameTxt, "wrap");
     formPanel.add(dateCreatedLbl, ALIGN_LABEL);
-    formPanel.add(datePicker, "wrap");
+    formPanel.add(createdDatePicker, "wrap");
+    formPanel.add(netAmoutLbl, ALIGN_LABEL);
+    formPanel.add(netAmountTxt, "wrap");
    
     deductionTable = new JTable(new DeductionTableModel());
     JScrollPane accountsPane = new JScrollPane(deductionTable);
@@ -90,10 +100,13 @@ public class LoadFinanceView extends JInternalFrame {
     closeBtn = new JButton("Close");
     clearBtn = new JButton("Clear");
     loadBtn = new JButton("Load");
+    viewBtn = new JButton("View");
+    viewBtn.setEnabled(false);
+
     buttonPanel.add(loadBtn, "");
+    buttonPanel.add(viewBtn, "");
     buttonPanel.add(clearBtn, "");
     buttonPanel.add(closeBtn);
-
     return buttonPanel;
   }
 
@@ -121,12 +134,20 @@ public class LoadFinanceView extends JInternalFrame {
     this.accountNameTxt = accountNameTxt;
   }
 
-  public JXDatePicker getDatePicker() {
-    return datePicker;
+  public JXDatePicker getCreatedDatePicker() {
+    return createdDatePicker;
   }
 
-  public void setDatePicker(JXDatePicker datePicker) {
-    this.datePicker = datePicker;
+  public void setCreatedDatePicker(JXDatePicker datePicker) {
+    this.createdDatePicker = datePicker;
+  }
+
+  public JTextField getNetAmountTxt() {
+    return netAmountTxt;
+  }
+
+  public void setNetAmountTxt(JTextField netAmountTxt) {
+    this.netAmountTxt = netAmountTxt;
   }
 
   public JButton getCloseBtn() {
@@ -151,6 +172,14 @@ public class LoadFinanceView extends JInternalFrame {
 
   public void setLoadBtn(JButton loadBtn) {
     this.loadBtn = loadBtn;
+  }
+
+  public JButton getViewBtn() {
+    return viewBtn;
+  }
+
+  public void setViewBtn(JButton viewBtn) {
+    this.viewBtn = viewBtn;
   }
 
   public JTable getDeductionTable() {

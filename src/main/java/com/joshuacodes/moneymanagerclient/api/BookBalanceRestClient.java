@@ -12,7 +12,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import com.joshuacodes.moneymanagerclient.model.AccountDTO;
-import com.joshuacodes.moneymanagerclient.model.BookBalanceExport;
 
 /**
  * {@code BookBalanceRestClient} Class
@@ -42,9 +41,9 @@ public class BookBalanceRestClient {
     restTemplate.setMessageConverters(messageConverters);
   }
 
-  public HttpStatus postBookBalance(BookBalanceExport export) {
-    ResponseEntity<BookBalanceExport> responseEntityStr =
-        restTemplate.postForEntity(IMPORT_ENDPOINT, export, BookBalanceExport.class);
+  public HttpStatus postBookBalance(AccountDTO export) {
+    ResponseEntity<AccountDTO> responseEntityStr =
+        restTemplate.postForEntity(IMPORT_ENDPOINT, export, AccountDTO.class);
 
     return responseEntityStr.getStatusCode();
 

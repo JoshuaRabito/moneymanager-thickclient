@@ -2,7 +2,7 @@ package com.joshuacodes.moneymanagerclient.controller;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,11 +11,12 @@ import javax.inject.Inject;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import org.springframework.http.HttpStatus;
+import com.joshuacodes.moneymanagerclient.api.AccountDTOBuilder;
 import com.joshuacodes.moneymanagerclient.api.BookBalanceRestClient;
 import com.joshuacodes.moneymanagerclient.api.ViewActions;
 import com.joshuacodes.moneymanagerclient.api.ViewableCombo;
+import com.joshuacodes.moneymanagerclient.model.AccountDTO;
 import com.joshuacodes.moneymanagerclient.model.AccountType;
-import com.joshuacodes.moneymanagerclient.model.BookBalanceExport;
 import com.joshuacodes.moneymanagerclient.model.DeductionDTO;
 import com.joshuacodes.moneymanagerclient.model.DeductionsInMemory;
 import com.joshuacodes.moneymanagerclient.validator.NetIncomeViewValidator;
@@ -63,20 +64,15 @@ public class NetIncomeViewController implements ViewableCombo<NetIncomeView>, Vi
         validator.validate(view.getGrossAmountTxt().getText(), view.getDeductionList().getModel());
     if (isValid) {
       // build managedFinanceExport
-      BookBalanceExport export = buildBookBalanceExport();
+      AccountDTO accountDTO = buildAccountDTO();
       // send data to rest end point for storage
-      sendExportToRestEndPoint(export);
+      sendExportToRestEndPoint(accountDTO);
     }
 
   }
+  
 
-  private void sendExportToRestEndPoint(BookBalanceExport export) {
-    HttpStatus status = restClient.postBookBalance(export);
-    logger.log(Level.INFO, "Status of posting finances is {0}", status);
-
-  }
-
-  private BookBalanceExport buildBookBalanceExport() {
+  private AccountDTO buildAccountDTO() {
     Set<DeductionDTO> deductions = deductionsInMemory.getDeductions();
     BigDecimal net = BigDecimal.valueOf(Double.valueOf(view.getNetAmountText().getText()));
     net = net.setScale(2, RoundingMode.UNNECESSARY);
@@ -85,13 +81,21 @@ public class NetIncomeViewController implements ViewableCombo<NetIncomeView>, Vi
 
     JComboBox<AccountType> accountTypeCombo = view.getAccountTypeCombo();
 
-    return new BookBalanceExport.ExportBuilder()
-        .setDeductList(Arrays.asList(deductions.toArray(new DeductionDTO[deductions.size()])))
+    return AccountDTOBuilder.getInstance()
+        .setDeductList(new ArrayList<>(deductions))
         .setType(accountTypeCombo.getItemAt(accountTypeCombo.getSelectedIndex()))
-        .setfName(view.getFirstNameTxt().getText()).setlName(view.getLastNameTxt().getText())
+        .setfirstName(view.getFirstNameTxt().getText())
+        .setlastName(view.getLastNameTxt().getText())
         .setAccountName(view.getAccountNameTxt().getText())
         .setGross(gross)
-        .setNet(net).build();
+        .setNet(net)
+        .build();
+  }
+  
+  private void sendExportToRestEndPoint(AccountDTO export) {
+    HttpStatus status = restClient.postBookBalance(export);
+    logger.log(Level.INFO, "Status of posting finances is {0}", status);
+
   }
 
   private void addDeductions() {

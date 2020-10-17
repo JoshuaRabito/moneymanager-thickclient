@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Objects;
 
 public class AccountDTO implements Serializable {
-
+  
+  private Long accountId;
+  private String firstName;
+  private String lastName;
   private String accountType;
   private String accountName;
   private List<DeductionDTO> deductions;
@@ -15,6 +18,32 @@ public class AccountDTO implements Serializable {
   private BigDecimal netAmount;
   private Date dateCreated;
   private Date dateUpdated;
+
+  
+  
+  public Long getAccountId() {
+    return accountId;
+  }
+
+  public void setAccountId(Long accountId) {
+    this.accountId = accountId;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
   public String getAccountType() {
     return accountType;
@@ -74,8 +103,8 @@ public class AccountDTO implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountName, accountType, dateCreated, dateUpdated, deductions, grossAmount,
-        netAmount);
+    return Objects.hash(accountId, accountName, accountType, dateCreated, dateUpdated, deductions,
+        firstName, grossAmount, lastName, netAmount);
   }
 
   @Override
@@ -87,37 +116,29 @@ public class AccountDTO implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     AccountDTO other = (AccountDTO) obj;
-    return Objects.equals(accountName, other.accountName)
+    return Objects.equals(accountId, other.accountId)
+        && Objects.equals(accountName, other.accountName)
         && Objects.equals(accountType, other.accountType)
         && Objects.equals(dateCreated, other.dateCreated)
         && Objects.equals(dateUpdated, other.dateUpdated)
         && Objects.equals(deductions, other.deductions)
+        && Objects.equals(firstName, other.firstName)
         && Objects.equals(grossAmount, other.grossAmount)
-        && Objects.equals(netAmount, other.netAmount);
+        && Objects.equals(lastName, other.lastName) && Objects.equals(netAmount, other.netAmount);
   }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append("AccountDTO [accountType=");
-    builder.append(accountType);
-    builder.append(", accountName=");
-    builder.append(accountName);
-    builder.append(", deductions=");
-    builder.append(deductions);
-    builder.append(", grossAmount=");
-    builder.append(grossAmount);
-    builder.append(", netAmount=");
-    builder.append(netAmount);
-    builder.append(", dateCreated=");
-    builder.append(dateCreated);
-    builder.append(", dateUpdated=");
-    builder.append(dateUpdated);
-    builder.append("]");
+    builder.append("AccountDTO [accountId=").append(accountId).append(", firstName=")
+        .append(firstName).append(", lastName=").append(lastName).append(", accountType=")
+        .append(accountType).append(", accountName=").append(accountName).append(", deductions=")
+        .append(deductions).append(", grossAmount=").append(grossAmount).append(", netAmount=")
+        .append(netAmount).append(", dateCreated=").append(dateCreated).append(", dateUpdated=")
+        .append(dateUpdated).append("]");
     return builder.toString();
   }
 
-
-
+ 
 
 }
