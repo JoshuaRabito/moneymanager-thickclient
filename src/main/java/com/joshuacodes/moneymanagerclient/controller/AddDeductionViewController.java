@@ -88,4 +88,11 @@ public class AddDeductionViewController implements ViewableCombo<AddDeductionVie
     view.dispose();
   }
 
+  public void loadDeductionInView(DeductionDTO deduction) {
+    view.getNameTxt().setText(deduction.getName());
+    view.getTypeCombo().setSelectedItem(deduction.getType());
+    view.getAmountTxt().setText(deduction.getAmount().toPlainString());
+    
+  }
+
 }

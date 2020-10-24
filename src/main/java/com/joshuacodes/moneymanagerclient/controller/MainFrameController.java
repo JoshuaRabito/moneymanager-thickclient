@@ -94,6 +94,7 @@ public class MainFrameController {
 		SwingUtilities.invokeLater(() ->{
 			
 			DeductionView deductionView = deductionViewController.getView();
+			
 			mainFrame.getContentPane().add(deductionView);
 			deductionView.toFront();
 			deductionView.setVisible(true);
