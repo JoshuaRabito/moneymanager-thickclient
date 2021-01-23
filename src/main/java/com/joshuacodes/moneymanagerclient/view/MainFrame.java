@@ -16,6 +16,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem netIncomeItem;
 	private JMenuItem loadItem;
 	private JMenuItem lookAndFeelItem;
+	private JMenuItem searchItem;
 	public static JDesktopPane contentPane = new JDesktopPane();
 
 	public MainFrame() {
@@ -43,10 +44,12 @@ public class MainFrame extends JFrame {
 		deductionItem = new JMenuItem("Deductions");
 		netIncomeItem = new JMenuItem("Net Income");
 	    loadItem = new JMenuItem("Load");
+	    searchItem = new JMenuItem("Search");
 		
 		manageMenu.add(deductionItem);
 		manageMenu.add(netIncomeItem);
 		manageMenu.add(loadItem);
+		manageMenu.add(searchItem);
 		
 		JMenu optionsMenu = new JMenu("Options");
 		lookAndFeelItem = new JMenuItem("Look And Feel");
@@ -71,6 +74,10 @@ public class MainFrame extends JFrame {
     public JMenuItem getLoadItem() {
       return loadItem;
     }
+
+	public JMenuItem getSearchItem() {
+		return searchItem;
+	}
 
 	public JDesktopPane getContentPane() {
 		return contentPane;

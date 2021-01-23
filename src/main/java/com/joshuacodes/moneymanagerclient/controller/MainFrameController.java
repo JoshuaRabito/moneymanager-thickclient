@@ -3,7 +3,10 @@ package com.joshuacodes.moneymanagerclient.controller;
 import java.beans.PropertyVetoException;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.swing.JInternalFrame;
 import javax.swing.SwingUtilities;
+
+import com.joshuacodes.moneymanagerclient.view.DeductionSearchView;
 import com.joshuacodes.moneymanagerclient.view.DeductionView;
 import com.joshuacodes.moneymanagerclient.view.LoadFinanceView;
 import com.joshuacodes.moneymanagerclient.view.LookAndFeelView;
@@ -13,138 +16,84 @@ import com.joshuacodes.moneymanagerclient.view.NetIncomeView;
 @ApplicationScoped
 public class MainFrameController {
 
-	private MainFrame mainFrame;
-	
-	@Inject
-	private LookAndFeelViewController lookAndFeelViewController;
-	
-	@Inject 
-	private DeductionViewController deductionViewController;
-	
-	@Inject 
-	private NetIncomeViewController netIncomeViewController;
-	
-	@Inject
-	private LoadFinanceController loadFinanceController;
+  private MainFrame mainFrame;
 
-	private MainFrameController() {
-	}
+  @Inject
+  private LookAndFeelViewController lookAndFeelViewController;
 
-	
-	
-	public MainFrame initMainFrame() {
-		init();
-		bindListeners();
-		return mainFrame;
-	}
-	
-	private void init() {
-		this.mainFrame = new MainFrame();
-		
-	}
+  @Inject
+  private DeductionViewController deductionViewController;
 
-	private void bindListeners() {
-		mainFrame.getDeductionItem().addActionListener(e -> {
-			refreshDesktopPane();
-			openDeductionView();
-		});
-		
-		mainFrame.getNetIncomeItem().addActionListener(e -> {
-			refreshDesktopPane();
-			openNetIncomeView();
-		});
-		
-		mainFrame.getLookAndFeelItem().addActionListener(e -> {
-			refreshDesktopPane();
-			openLookAndFeelView();
-		});
-		
-		mainFrame.getLoadItem().addActionListener(e -> {
-		  refreshDesktopPane();
-          openLoadView();
-		});
-	}
+  @Inject
+  private NetIncomeViewController netIncomeViewController;
 
+  @Inject
+  private LoadFinanceController loadFinanceController;
 
+  @Inject
+  private DeductionSearchController deductionSearchController;
 
-	private void openLookAndFeelView() {
-		SwingUtilities.invokeLater(() -> {
+  private MainFrameController() {}
 
-			LookAndFeelView lookAndFeelView = lookAndFeelViewController.getView();
-			mainFrame.getContentPane().add(lookAndFeelView);
-			lookAndFeelView.toFront();
-			lookAndFeelView.setVisible(true);
-			try {
-				lookAndFeelView.setSelected(true);
-			} catch (PropertyVetoException e) {
-				e.printStackTrace();
-			}
-		});
-
-	}
-
-
-
-	private void refreshDesktopPane() {
-		mainFrame.getContentPane().removeAll();
-		mainFrame.getContentPane().updateUI();
-	}
-	
-	private void openDeductionView() {
-		SwingUtilities.invokeLater(() ->{
-			
-			DeductionView deductionView = deductionViewController.getView();
-			
-			mainFrame.getContentPane().add(deductionView);
-			deductionView.toFront();
-			deductionView.setVisible(true);
-			try {
-				deductionView.setSelected(true);
-			} catch (PropertyVetoException e) {
-				e.printStackTrace();
-			}
-		});
-		
-		
-	}
-	
-	private void openNetIncomeView() {
-		SwingUtilities.invokeLater(() ->{
-			NetIncomeView netView = netIncomeViewController.getView();
-			mainFrame.getContentPane().add(netView);
-			netView.toFront();
-			netView.setVisible(true);
-			try {
-				netView.setSelected(true);
-			} catch (PropertyVetoException e) {
-				e.printStackTrace();
-			}
-		});
-		
-	}
-	
-	private void openLoadView() {
-      SwingUtilities.invokeLater(() ->{
-          LoadFinanceView loadView = loadFinanceController.getView();
-          mainFrame.getContentPane().add(loadView);
-          loadView.toFront();
-          loadView.setVisible(true);
-          try {
-            loadView.setSelected(true);
-          } catch (PropertyVetoException e) {
-              e.printStackTrace();
-          }
-      });
-      
+  public MainFrame initMainFrame() {
+    init();
+    bindListeners();
+    return mainFrame;
   }
 
+  private void init() {
+    this.mainFrame = new MainFrame();
 
-	public void updateComponents() {
-		SwingUtilities.updateComponentTreeUI(mainFrame);
-		
-	}
+  }
 
-	
-	
+  private void bindListeners() {
+    mainFrame.getDeductionItem().addActionListener(e -> {
+      refreshDesktopPane();
+      openView(deductionViewController.getView());
+    });
+
+    mainFrame.getNetIncomeItem().addActionListener(e -> {
+      refreshDesktopPane();
+      openView(netIncomeViewController.getView());
+    });
+
+    mainFrame.getLookAndFeelItem().addActionListener(e -> {
+      refreshDesktopPane();
+      openView(lookAndFeelViewController.getView());
+    });
+
+    mainFrame.getLoadItem().addActionListener(e -> {
+      refreshDesktopPane();
+      openView(loadFinanceController.getView());
+    });
+
+    mainFrame.getSearchItem().addActionListener(e -> {
+      refreshDesktopPane();
+      openView(deductionSearchController.getView());
+
+    });
+  }
+
+  private void refreshDesktopPane() {
+    mainFrame.getContentPane().removeAll();
+    mainFrame.getContentPane().updateUI();
+  }
+
+  private void openView(JInternalFrame view) {
+    SwingUtilities.invokeLater(() -> {
+      mainFrame.getContentPane().add(view);
+      view.toFront();
+      view.setVisible(true);
+      try {
+        view.setSelected(true);
+      } catch (PropertyVetoException e) {
+        e.printStackTrace();
+      }
+    });
+  }
+
+  public void updateComponents() {
+    SwingUtilities.updateComponentTreeUI(mainFrame);
+  }
 
 }
