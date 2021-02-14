@@ -10,7 +10,7 @@
 	<name>moneymanager-thick-client</name>
 
 	<properties>
-		<jdk.version>1.8</jdk.version>
+		<jdk.version>14 </jdk.version>
 		<junit.version>5.6.2</junit.version>
 		<sonar.projectKey>JoshuaRabito_moneymanager-thickclient</sonar.projectKey>
 		<sonar.organization>joshuarabito</sonar.organization>
@@ -109,12 +109,12 @@
 			<version>5.6.2</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-core</artifactId>
-		    <version>3.3.3</version>
-		    <scope>test</scope>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>3.3.3</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

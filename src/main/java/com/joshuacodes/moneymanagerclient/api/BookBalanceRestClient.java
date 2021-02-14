@@ -12,6 +12,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import com.joshuacodes.moneymanagerclient.model.AccountDTO;
+import com.joshuacodes.moneymanagerclient.model.DeductionDTO;
 
 /**
  * {@code BookBalanceRestClient} Class
@@ -28,6 +29,8 @@ import com.joshuacodes.moneymanagerclient.model.AccountDTO;
 public class BookBalanceRestClient {
   private static final String IMPORT_ENDPOINT = ResourcesBundleReader.getString("endpoint.account.import"); //$NON-NLS-1$
   private static final String EXPORT_ENDPOINT = ResourcesBundleReader.getString("endpoint.account.export"); //$NON-NLS-1$
+  private static final String SAVINGS_SEARCH_ENDPOINT = ResourcesBundleReader.getString("endpoint.account.savings"); //$NON-NLS-1$
+
 
   private RestTemplate restTemplate;
 
@@ -44,9 +47,7 @@ public class BookBalanceRestClient {
   public HttpStatus postBookBalance(AccountDTO export) {
     ResponseEntity<AccountDTO> responseEntityStr =
         restTemplate.postForEntity(IMPORT_ENDPOINT, export, AccountDTO.class);
-
     return responseEntityStr.getStatusCode();
-
   }
 
 
@@ -57,6 +58,14 @@ public class BookBalanceRestClient {
         accountName, dateCreated);
     System.out.println(responseEntity.getBody());
     return responseEntity.getBody();
+  }
+
+  public DeductionDTO searchSavingsForDeduction(String deductionName) {
+    ResponseEntity<DeductionDTO> responseEntity =
+        restTemplate.getForEntity(
+         SAVINGS_SEARCH_ENDPOINT, DeductionDTO.class, deductionName);
+     System.out.println(responseEntity.getBody());
+     return responseEntity.getBody();   
   }
 
 }

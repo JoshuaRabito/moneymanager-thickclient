@@ -5,13 +5,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.swing.JInternalFrame;
 import javax.swing.SwingUtilities;
-
-import com.joshuacodes.moneymanagerclient.view.DeductionSearchView;
-import com.joshuacodes.moneymanagerclient.view.DeductionView;
-import com.joshuacodes.moneymanagerclient.view.LoadFinanceView;
-import com.joshuacodes.moneymanagerclient.view.LookAndFeelView;
 import com.joshuacodes.moneymanagerclient.view.MainFrame;
-import com.joshuacodes.moneymanagerclient.view.NetIncomeView;
 
 @ApplicationScoped
 public class MainFrameController {
@@ -31,7 +25,7 @@ public class MainFrameController {
   private LoadFinanceController loadFinanceController;
 
   @Inject
-  private DeductionSearchController deductionSearchController;
+  private SavingsSearchController deductionSearchController;
 
   private MainFrameController() {}
 
