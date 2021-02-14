@@ -16,7 +16,7 @@ import net.miginfocom.swing.MigLayout;
 public class AddDeductionView extends JInternalFrame {
 
 	private static final String ALIGN_LABEL = "align label";
-  private JButton saveBtn;
+    private JButton saveBtn;
 	private JButton closeBtn;
 	private JTextField nameTxt;
 	private JComboBox<DeductionTypes> typeCombo;
