@@ -1,10 +1,5 @@
 package com.joshuacodes.moneymanagerclient.controller;
 
-import java.beans.PropertyVetoException;
-import java.util.List;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.swing.SwingUtilities;
 import com.joshuacodes.moneymanagerclient.api.BookBalanceRestClient;
 import com.joshuacodes.moneymanagerclient.api.DeductionTableModel;
 import com.joshuacodes.moneymanagerclient.api.ViewActions;
@@ -15,6 +10,11 @@ import com.joshuacodes.moneymanagerclient.validator.LoadFinanceValidator;
 import com.joshuacodes.moneymanagerclient.view.AddDeductionView;
 import com.joshuacodes.moneymanagerclient.view.LoadFinanceView;
 import com.joshuacodes.moneymanagerclient.view.MainFrame;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import java.beans.PropertyVetoException;
+import java.util.List;
+import javax.swing.SwingUtilities;
 
 @ApplicationScoped
 public class LoadFinanceController implements ViewActions<LoadFinanceView> {

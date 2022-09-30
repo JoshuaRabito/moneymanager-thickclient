@@ -1,10 +1,5 @@
 package com.joshuacodes.moneymanagerclient.controller;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.swing.DefaultComboBoxModel;
 import com.joshuacodes.moneymanagerclient.api.ViewActions;
 import com.joshuacodes.moneymanagerclient.api.ViewableCombo;
 import com.joshuacodes.moneymanagerclient.model.DeductionDTO;
@@ -12,6 +7,11 @@ import com.joshuacodes.moneymanagerclient.model.DeductionTypes;
 import com.joshuacodes.moneymanagerclient.model.DeductionsInMemory;
 import com.joshuacodes.moneymanagerclient.validator.AddDeductionViewValidator;
 import com.joshuacodes.moneymanagerclient.view.AddDeductionView;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import javax.swing.DefaultComboBoxModel;
 
 @ApplicationScoped
 public class AddDeductionViewController implements ViewableCombo<AddDeductionView>, ViewActions<AddDeductionView>{

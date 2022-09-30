@@ -1,10 +1,12 @@
 package com.joshuacodes.moneymanagerclient.cdi;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.InjectionPoint;
 import java.util.logging.Logger;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
 
-public class LoggerFactory {
+@ApplicationScoped
+public class LoggerProducer {
   
   
   @Produces

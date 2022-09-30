@@ -1,16 +1,5 @@
 package com.joshuacodes.moneymanagerclient.controller;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import org.springframework.http.HttpStatus;
 import com.joshuacodes.moneymanagerclient.api.AccountDTOBuilder;
 import com.joshuacodes.moneymanagerclient.api.BookBalanceRestClient;
 import com.joshuacodes.moneymanagerclient.api.ViewActions;
@@ -21,6 +10,17 @@ import com.joshuacodes.moneymanagerclient.model.DeductionDTO;
 import com.joshuacodes.moneymanagerclient.model.DeductionsInMemory;
 import com.joshuacodes.moneymanagerclient.validator.NetIncomeViewValidator;
 import com.joshuacodes.moneymanagerclient.view.NetIncomeView;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import org.springframework.http.HttpStatus;
 
 @ApplicationScoped
 public class NetIncomeViewController implements ViewableCombo<NetIncomeView>, ViewActions<NetIncomeView> {
@@ -28,7 +28,7 @@ public class NetIncomeViewController implements ViewableCombo<NetIncomeView>, Vi
   private NetIncomeView view;
   private NetIncomeViewValidator validator;
   
-  @Inject 
+  @Inject
   private DeductionsInMemory deductionsInMemory;
   
   @Inject
@@ -92,8 +92,13 @@ public class NetIncomeViewController implements ViewableCombo<NetIncomeView>, Vi
   }
   
   private void sendExportToRestEndPoint(AccountDTO export) {
-    HttpStatus status = restClient.postBookBalance(export);
-    logger.log(Level.INFO, "Status of posting finances is {0}", status);
+    try{
+      HttpStatus status = restClient.postBookBalance(export);
+      logger.log(Level.INFO, "Status of posting finances is {0}", status);
+
+    }catch(Exception e) {
+      logger.log(Level.SEVERE, "An error occurred saving deductions.", e);
+    }
 
   }
 

@@ -1,10 +1,10 @@
 package com.joshuacodes.moneymanagerclient.validator;
 
+import com.joshuacodes.moneymanagerclient.model.DeductionDTO;
+import com.joshuacodes.moneymanagerclient.view.NetIncomeView;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import org.apache.commons.lang3.StringUtils;
-import com.joshuacodes.moneymanagerclient.model.DeductionDTO;
-import com.joshuacodes.moneymanagerclient.view.NetIncomeView;
 
 /**
  * {@code NetIncomeViewValidator} class.

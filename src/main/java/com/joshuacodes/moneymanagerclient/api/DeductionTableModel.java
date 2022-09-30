@@ -1,11 +1,11 @@
 package com.joshuacodes.moneymanagerclient.api;
 
+import com.joshuacodes.moneymanagerclient.model.DeductionDTO;
+import com.joshuacodes.moneymanagerclient.model.DeductionTypes;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import com.joshuacodes.moneymanagerclient.model.DeductionDTO;
-import com.joshuacodes.moneymanagerclient.model.DeductionTypes;
 
 public class DeductionTableModel extends AbstractTableModel {
 

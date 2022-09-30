@@ -1,13 +1,13 @@
 package com.joshuacodes.moneymanagerclient.view;
 
+import com.joshuacodes.moneymanagerclient.api.LookAndFeel;
+import com.joshuacodes.moneymanagerclient.api.MyInternalFrameListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import com.joshuacodes.moneymanagerclient.api.LookAndFeel;
-import com.joshuacodes.moneymanagerclient.api.MyInternalFrameListener;
 import net.miginfocom.swing.MigLayout;
 
 public class LookAndFeelView extends JInternalFrame {

@@ -1,5 +1,7 @@
 package com.joshuacodes.moneymanagerclient.view;
 
+import com.joshuacodes.moneymanagerclient.api.DeductionTableModel;
+import com.joshuacodes.moneymanagerclient.api.MyInternalFrameListener;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -9,10 +11,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import org.jdesktop.swingx.JXDatePicker;
-import com.joshuacodes.moneymanagerclient.api.DeductionTableModel;
-import com.joshuacodes.moneymanagerclient.api.MyInternalFrameListener;
 import net.miginfocom.swing.MigLayout;
+import org.jdesktop.swingx.JXDatePicker;
 
 public class LoadFinanceView extends JInternalFrame {
 

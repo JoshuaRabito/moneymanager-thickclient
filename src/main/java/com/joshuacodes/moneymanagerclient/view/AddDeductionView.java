@@ -1,5 +1,7 @@
 package com.joshuacodes.moneymanagerclient.view;
 
+import com.joshuacodes.moneymanagerclient.api.MyInternalFrameListener;
+import com.joshuacodes.moneymanagerclient.model.DeductionTypes;
 import java.text.DecimalFormat;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -9,8 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import com.joshuacodes.moneymanagerclient.api.MyInternalFrameListener;
-import com.joshuacodes.moneymanagerclient.model.DeductionTypes;
 import net.miginfocom.swing.MigLayout;
 
 public class AddDeductionView extends JInternalFrame {

@@ -1,14 +1,14 @@
 package com.joshuacodes.moneymanagerclient.controller;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import com.joshuacodes.moneymanagerclient.api.LookAndFeel;
 import com.joshuacodes.moneymanagerclient.api.ViewActions;
 import com.joshuacodes.moneymanagerclient.api.ViewableCombo;
 import com.joshuacodes.moneymanagerclient.view.LookAndFeelView;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 @ApplicationScoped
 public class LookAndFeelViewController implements ViewableCombo<LookAndFeelView>, ViewActions<LookAndFeelView>{

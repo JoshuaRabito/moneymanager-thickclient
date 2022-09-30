@@ -1,8 +1,8 @@
 package com.joshuacodes.moneymanagerclient.model;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.HashSet;
 import java.util.Set;
-import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class DeductionsInMemory {

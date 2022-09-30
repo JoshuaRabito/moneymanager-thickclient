@@ -1,5 +1,6 @@
 package com.joshuacodes.moneymanagerclient.view;
 
+import com.joshuacodes.moneymanagerclient.api.ResourcesBundleReader;
 import javax.swing.DefaultDesktopManager;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -7,7 +8,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import com.joshuacodes.moneymanagerclient.api.ResourcesBundleReader;
 
 public class MainFrame extends JFrame {
 

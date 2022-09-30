@@ -1,11 +1,11 @@
 package com.joshuacodes.moneymanagerclient.controller;
 
+import com.joshuacodes.moneymanagerclient.view.MainFrame;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.beans.PropertyVetoException;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.swing.JInternalFrame;
 import javax.swing.SwingUtilities;
-import com.joshuacodes.moneymanagerclient.view.MainFrame;
 
 @ApplicationScoped
 public class MainFrameController {

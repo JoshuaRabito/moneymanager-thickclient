@@ -1,13 +1,13 @@
 package com.joshuacodes.moneymanagerclient.view;
 
+import com.joshuacodes.moneymanagerclient.api.DeductionTableModel;
+import com.joshuacodes.moneymanagerclient.api.MyInternalFrameListener;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
-import com.joshuacodes.moneymanagerclient.api.DeductionTableModel;
-import com.joshuacodes.moneymanagerclient.api.MyInternalFrameListener;
 import net.miginfocom.swing.MigLayout;
 
 public class DeductionView extends JInternalFrame {

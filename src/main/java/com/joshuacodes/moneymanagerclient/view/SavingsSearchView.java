@@ -1,5 +1,6 @@
 package com.joshuacodes.moneymanagerclient.view;
 
+import com.joshuacodes.moneymanagerclient.api.MyInternalFrameListener;
 import java.text.DecimalFormat;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -8,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import com.joshuacodes.moneymanagerclient.api.MyInternalFrameListener;
 import net.miginfocom.swing.MigLayout;
 
 public class SavingsSearchView extends JInternalFrame {

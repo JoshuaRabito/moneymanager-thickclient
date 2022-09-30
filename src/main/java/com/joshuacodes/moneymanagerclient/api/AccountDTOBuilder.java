@@ -1,11 +1,11 @@
 package com.joshuacodes.moneymanagerclient.api;
 
-import java.math.BigDecimal;
-import java.util.List;
 import com.joshuacodes.moneymanagerclient.model.AccountDTO;
 import com.joshuacodes.moneymanagerclient.model.AccountType;
 import com.joshuacodes.moneymanagerclient.model.DeductionDTO;
 import com.joshuacodes.moneymanagerclient.model.UserDto;
+import java.math.BigDecimal;
+import java.util.List;
 
 public final class AccountDTOBuilder {
 

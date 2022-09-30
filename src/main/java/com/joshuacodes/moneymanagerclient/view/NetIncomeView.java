@@ -1,5 +1,8 @@
 package com.joshuacodes.moneymanagerclient.view;
 
+import com.joshuacodes.moneymanagerclient.api.MyInternalFrameListener;
+import com.joshuacodes.moneymanagerclient.model.AccountType;
+import com.joshuacodes.moneymanagerclient.model.DeductionDTO;
 import java.awt.Font;
 import java.text.DecimalFormat;
 import javax.swing.JButton;
@@ -12,9 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import com.joshuacodes.moneymanagerclient.api.MyInternalFrameListener;
-import com.joshuacodes.moneymanagerclient.model.AccountType;
-import com.joshuacodes.moneymanagerclient.model.DeductionDTO;
 import net.miginfocom.swing.MigLayout;
 
 public class NetIncomeView extends JInternalFrame {
